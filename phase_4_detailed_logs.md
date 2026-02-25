@@ -76,8 +76,6 @@ Why this method:
 
 | Variant | Size (bytes) | Size (GiB) |
 |---|---:|---:|
-| `BF16/Qwen3.5-27B-BF16-00001-of-00002.gguf` | 49954636992 | 46.52 |
-| `BF16/Qwen3.5-27B-BF16-00002-of-00002.gguf` | 3853644192 | 3.59 |
 | `mmproj-BF16.gguf` | 931146176 | 0.87 |
 | `mmproj-F16.gguf` | 927607232 | 0.86 |
 | `mmproj-F32.gguf` | 1842940352 | 1.72 |

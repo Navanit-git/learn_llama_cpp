@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Phase 4 query-driven quant benchmark for:
-#   unsloth/Ministral-3-14B-Instruct-2512-GGUF
+#   unsloth/Qwen3.5-27B-GGUF
 #
 # NEW in this version:
 #   - CPU usage % snapshot (before/after per query)
@@ -31,8 +31,13 @@ LLAMA_CLI_BIN="${LLAMA_CLI_BIN:-$BIN_DIR/llama-cli}"
 LLAMA_SERVER_BIN="${LLAMA_SERVER_BIN:-$BIN_DIR/llama-server}"
 
 # ─── Model identity ───────────────────────────────────────────────────────────
-MODEL_REPO="${MODEL_REPO:-unsloth/Ministral-3-14B-Instruct-2512-GGUF}"
-MODEL_PREFIX="${MODEL_PREFIX:-Ministral-3-14B-Instruct-2512}"
+# Mistral defaults (kept for quick switch-back):
+# MODEL_REPO="${MODEL_REPO:-unsloth/Ministral-3-14B-Instruct-2512-GGUF}"
+# MODEL_PREFIX="${MODEL_PREFIX:-Ministral-3-14B-Instruct-2512}"
+
+# Qwen3.5 defaults:
+MODEL_REPO="${MODEL_REPO:-unsloth/Qwen3.5-27B-GGUF}"
+MODEL_PREFIX="${MODEL_PREFIX:-Qwen3.5-27B}"
 
 # ─── Runtime defaults (tuned for 4GB VRAM) ────────────────────────────────────
 THREADS="${THREADS:-10}"
@@ -68,11 +73,7 @@ if [[ -n "${VARIANTS_CSV:-}" ]]; then
   IFS=',' read -r -a VARIANTS <<< "$VARIANTS_CSV"
 else
   VARIANTS=(
-
-    "IQ4_NL"
-    "IQ4_XS"
     "Q2_K"
-    "Q2_K_L"
     "Q3_K_M"
     "Q3_K_S"
     "Q4_0"
@@ -83,13 +84,6 @@ else
     "Q5_K_S"
     "Q6_K"
     "Q8_0"
-    "UD-IQ1_M"
-    "UD-IQ1_S"
-    "UD-IQ2_M"
-    "UD-IQ2_XXS"
-    "UD-IQ3_XXS"
-    "UD-Q2_K_XL"
-    "UD-Q3_K_XL"
     "UD-Q4_K_XL"
     "UD-Q5_K_XL"
     "UD-Q6_K_XL"

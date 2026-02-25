@@ -48,6 +48,7 @@ QUERY_TIMEOUT_SEC="${QUERY_TIMEOUT_SEC:-6000}"
 
 CACHE_TYPE_K="${CACHE_TYPE_K:-q8_0}"
 CACHE_TYPE_V="${CACHE_TYPE_V:-q8_0}"
+RESPONSE_TEXT_SOURCE="${RESPONSE_TEXT_SOURCE:-server}"
 
 # ─── Server config ────────────────────────────────────────────────────────────
 SERVER_HOST="${SERVER_HOST:-127.0.0.1}"
@@ -211,14 +212,20 @@ import re, sys
 text = open(sys.argv[1], 'r', encoding='utf-8', errors='ignore').read().splitlines()
 line = None
 for row in text:
-    if 'memory breakdown' in row and 'CUDA0' in row:
-        line = row
+  # Newer logs may not include the words "memory breakdown" on the CUDA row,
+  # so match any CUDA0 breakdown line that carries the numeric decomposition.
+  if 'CUDA0' in row and '=' in row:
+    line = row
 if not line:
     print('NA NA NA NA'); raise SystemExit(0)
 m = re.search(r'\((\d+)\s*=\s*(\d+)\s*\+\s*(\d+)\s*\+\s*(\d+)\)', line)
 if not m:
     print('NA NA NA NA'); raise SystemExit(0)
-print(*m.groups())
+# Output order: cuda_total_mb, cuda_model_mb, cuda_context_mb, cuda_compute_mb
+total_m = re.search(r'\|\s*(\d+)\s*=\s*\d+\s*\+\s*\(', line)
+total = total_m.group(1) if total_m else 'NA'
+model, context, compute = m.group(2), m.group(3), m.group(4)
+print(total, model, context, compute)
 PY
 }
 
@@ -291,6 +298,75 @@ try:
 except Exception:
   print('NA')
 PY
+}
+
+# Query llama-server once and return assistant response text.
+# Returns: response text or NA
+fetch_server_response_for_query() {
+  local model_path="$1"
+  local query_text="$2"
+  local server_log="$3"
+  local port="$4"
+  local response_file="$5"
+
+  set +e
+  "$LLAMA_SERVER_BIN" \
+    -m "$model_path" \
+    --host "$SERVER_HOST" \
+    --port "$port" \
+    -t "$THREADS" \
+    -ngl "$N_GPU_LAYERS" \
+    -ncmoe "$N_CPU_MOE" \
+    --ctx-size "$CTX_SIZE" \
+    -b "$BATCH_SIZE" \
+    -ub "$UBATCH_SIZE" \
+    --log-prefix \
+    --log-file "$server_log" \
+    >/dev/null 2>&1 &
+  local server_pid=$!
+
+  sleep "$SERVER_BOOT_WAIT_SEC"
+
+  local smoke_rc=1
+  local http_rc=1
+
+  curl -s "http://${SERVER_HOST}:${port}/v1/models" > /dev/null
+  smoke_rc=$?
+
+  if [[ $smoke_rc -eq 0 ]]; then
+    local payload
+    payload="$(python3 - "$query_text" "$N_PREDICT" <<'PY'
+import json, sys
+q = sys.argv[1]
+n_predict = int(sys.argv[2])
+obj = {
+  'model': 'local',
+  'messages': [{'role': 'user', 'content': q}],
+  'max_tokens': n_predict,
+  'temperature': 0.2,
+  'top_p': 0.95,
+}
+print(json.dumps(obj))
+PY
+)"
+
+    curl -s -X POST \
+      "http://${SERVER_HOST}:${port}/v1/chat/completions" \
+      -H "Content-Type: application/json" \
+      -d "$payload" \
+      -o "$response_file"
+    http_rc=$?
+  fi
+
+  kill "$server_pid" >/dev/null 2>&1
+  wait "$server_pid" >/dev/null 2>&1
+  set -e
+
+  if [[ $smoke_rc -eq 0 && $http_rc -eq 0 && -f "$response_file" ]]; then
+    extract_server_response_text "$response_file"
+  else
+    echo "NA"
+  fi
 }
 
 # ── System snapshots ──────────────────────────────────────────────────────────
@@ -691,6 +767,8 @@ for variant in "${VARIANTS[@]}"; do
   for q in "${QUERIES[@]}"; do
     query_idx=$((query_idx + 1))
     query_log="$OUTPUT_ROOT/query_logs/${variant}_q${query_idx}.log"
+    query_resp_server_log="$OUTPUT_ROOT/server_logs/${variant}_q${query_idx}_response.log"
+    query_resp_server_json="$OUTPUT_ROOT/query_logs/${variant}_q${query_idx}_server_response.json"
     gpu_poll_file="$(mktemp /tmp/gpu_poll_XXXXXX.txt)"
 
     # -- Before-snapshots
@@ -753,7 +831,14 @@ for variant in "${VARIANTS[@]}"; do
                                           < <(extract_cuda_memory_from_cli_log "$query_log")
     read -r gpu_peak_mb gpu_avg_mb gpu_delta_mb \
                                           < <(compute_gpu_mem_stats           "$gpu_poll_file")
-    response_text="$(extract_llm_response_from_cli_log "$query_log")"
+    response_text="NA"
+    if [[ "$RESPONSE_TEXT_SOURCE" == "server" ]]; then
+      query_response_port="$((SERVER_PORT_BASE + 1000 + variant_index * 100 + query_idx))"
+      response_text="$(fetch_server_response_for_query "$model_path" "$q" "$query_resp_server_log" "$query_response_port" "$query_resp_server_json")"
+    fi
+    if [[ -z "$response_text" || "$response_text" == "NA" ]]; then
+      response_text="$(extract_llm_response_from_cli_log "$query_log")"
+    fi
 
     # Thermal throttle: compare clock before vs after
     thermal_throttle="$(detect_thermal_throttle "$gpu_clock_before" "$gpu_clock_after")"

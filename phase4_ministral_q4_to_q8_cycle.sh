@@ -31,13 +31,19 @@ LLAMA_CLI_BIN="${LLAMA_CLI_BIN:-$BIN_DIR/llama-cli}"
 LLAMA_SERVER_BIN="${LLAMA_SERVER_BIN:-$BIN_DIR/llama-server}"
 
 # ─── Model identity ───────────────────────────────────────────────────────────
-# Mistral defaults (kept for quick switch-back):
+# Toggle by commenting/uncommenting one preset block below:
+
+# Mistral 3 14B (quick switch-back)
 # MODEL_REPO="${MODEL_REPO:-unsloth/Ministral-3-14B-Instruct-2512-GGUF}"
 # MODEL_PREFIX="${MODEL_PREFIX:-Ministral-3-14B-Instruct-2512}"
 
-# Qwen3.5 defaults:
-MODEL_REPO="${MODEL_REPO:-unsloth/Qwen3.5-27B-GGUF}"
-MODEL_PREFIX="${MODEL_PREFIX:-Qwen3.5-27B}"
+# Qwen3.5 27B
+# MODEL_REPO="${MODEL_REPO:-unsloth/Qwen3.5-27B-GGUF}"
+# MODEL_PREFIX="${MODEL_PREFIX:-Qwen3.5-27B}"
+
+# Qwen3 14B (active preset for Phase 4 final part)
+MODEL_REPO="${MODEL_REPO:-unsloth/Qwen3-14B-GGUF}"
+MODEL_PREFIX="${MODEL_PREFIX:-Qwen3-14B}"
 
 # ─── Runtime defaults (tuned for 4GB VRAM) ────────────────────────────────────
 THREADS="${THREADS:-10}"
@@ -54,6 +60,7 @@ QUERY_TIMEOUT_SEC="${QUERY_TIMEOUT_SEC:-6000}"
 CACHE_TYPE_K="${CACHE_TYPE_K:-q8_0}"
 CACHE_TYPE_V="${CACHE_TYPE_V:-q8_0}"
 RESPONSE_TEXT_SOURCE="${RESPONSE_TEXT_SOURCE:-server}"
+SERVER_CMD_TIMEOUT_SEC="${SERVER_CMD_TIMEOUT_SEC:-$QUERY_TIMEOUT_SEC}"
 
 # ─── Server config ────────────────────────────────────────────────────────────
 SERVER_HOST="${SERVER_HOST:-127.0.0.1}"
@@ -72,23 +79,43 @@ GPU_POLL_INTERVAL="${GPU_POLL_INTERVAL:-1}"
 if [[ -n "${VARIANTS_CSV:-}" ]]; then
   IFS=',' read -r -a VARIANTS <<< "$VARIANTS_CSV"
 else
+  # Toggle by commenting/uncommenting one preset block below:
+
+  # Full sweep (all major variants)
+  # VARIANTS=(
+  #   "Q2_K"
+  #   "Q3_K_M"
+  #   "Q3_K_S"
+  #   "Q4_0"
+  #   "Q4_1"
+  #   "Q4_K_M"
+  #   "Q4_K_S"
+  #   "Q5_K_M"
+  #   "Q5_K_S"
+  #   "Q6_K"
+  #   "Q8_0"
+  #   "UD-Q4_K_XL"
+  #   "UD-Q5_K_XL"
+  #   "UD-Q6_K_XL"
+  #   "UD-Q8_K_XL"
+  # )
+
+  # Qwen3-14B shortlist (active preset)
   VARIANTS=(
     "Q2_K"
     "Q3_K_M"
-    "Q3_K_S"
-    "Q4_0"
-    "Q4_1"
     "Q4_K_M"
-    "Q4_K_S"
     "Q5_K_M"
-    "Q5_K_S"
-    "Q6_K"
     "Q8_0"
-    "UD-Q4_K_XL"
-    "UD-Q5_K_XL"
-    "UD-Q6_K_XL"
-    "UD-Q8_K_XL"
   )
+
+  # Quality-focused shortlist
+  # VARIANTS=(
+  #   "Q4_K_M"
+  #   "Q5_K_M"
+  #   "Q6_K"
+  #   "Q8_0"
+  # )
 fi
 
 # ─── Core queries ─────────────────────────────────────────────────────────────
@@ -158,6 +185,47 @@ csv_escape() {
   s="${s//$'\n'/\\n}"
   s="${s//\"/\"\"}"
   printf '"%s"' "$s"
+}
+
+start_llama_server_bg() {
+  local model_path="$1"
+  local port="$2"
+  local server_log="$3"
+
+  timeout --kill-after=10s "$SERVER_CMD_TIMEOUT_SEC" "$LLAMA_SERVER_BIN" \
+    -m "$model_path" \
+    --host "$SERVER_HOST" \
+    --port "$port" \
+    -t "$THREADS" \
+    -ngl "$N_GPU_LAYERS" \
+    -ncmoe "$N_CPU_MOE" \
+    --ctx-size "$CTX_SIZE" \
+    -b "$BATCH_SIZE" \
+    -ub "$UBATCH_SIZE" \
+    --log-prefix \
+    --log-file "$server_log" \
+    >/dev/null 2>&1 &
+}
+
+stop_bg_process() {
+  local pid="$1"
+
+  if kill -0 "$pid" >/dev/null 2>&1; then
+    kill "$pid" >/dev/null 2>&1 || true
+  fi
+
+  for _ in $(seq 1 20); do
+    if ! kill -0 "$pid" >/dev/null 2>&1; then
+      break
+    fi
+    sleep 0.5
+  done
+
+  if kill -0 "$pid" >/dev/null 2>&1; then
+    kill -9 "$pid" >/dev/null 2>&1 || true
+  fi
+
+  wait "$pid" >/dev/null 2>&1 || true
 }
 
 # ── Speed & timing parsers ────────────────────────────────────────────────────
@@ -329,19 +397,7 @@ fetch_server_response_for_query() {
   local response_file="$5"
 
   set +e
-  "$LLAMA_SERVER_BIN" \
-    -m "$model_path" \
-    --host "$SERVER_HOST" \
-    --port "$port" \
-    -t "$THREADS" \
-    -ngl "$N_GPU_LAYERS" \
-    -ncmoe "$N_CPU_MOE" \
-    --ctx-size "$CTX_SIZE" \
-    -b "$BATCH_SIZE" \
-    -ub "$UBATCH_SIZE" \
-    --log-prefix \
-    --log-file "$server_log" \
-    >/dev/null 2>&1 &
+  start_llama_server_bg "$model_path" "$port" "$server_log"
   local server_pid=$!
 
   sleep "$SERVER_BOOT_WAIT_SEC"
@@ -377,8 +433,7 @@ PY
     http_rc=$?
   fi
 
-  kill "$server_pid" >/dev/null 2>&1
-  wait "$server_pid" >/dev/null 2>&1
+  stop_bg_process "$server_pid"
   set -e
 
   if [[ $smoke_rc -eq 0 && $http_rc -eq 0 && -f "$response_file" ]]; then
@@ -611,19 +666,7 @@ run_server_and_tool_test() {
   local tool_resp_file="$4"
 
   set +e
-  "$LLAMA_SERVER_BIN" \
-    -m "$model_path" \
-    --host "$SERVER_HOST" \
-    --port "$port" \
-    -t "$THREADS" \
-    -ngl "$N_GPU_LAYERS" \
-    -ncmoe "$N_CPU_MOE" \
-    --ctx-size "$CTX_SIZE" \
-    -b "$BATCH_SIZE" \
-    -ub "$UBATCH_SIZE" \
-    --log-prefix \
-    --log-file "$server_log" \
-    >/dev/null 2>&1 &
+  start_llama_server_bg "$model_path" "$port" "$server_log"
   local server_pid=$!
 
   sleep "$SERVER_BOOT_WAIT_SEC"
@@ -652,8 +695,7 @@ print(json.dumps(obj))
     tool_http_rc=$?
   fi
 
-  kill "$server_pid" >/dev/null 2>&1
-  wait "$server_pid" >/dev/null 2>&1
+  stop_bg_process "$server_pid"
   set -e
 
   local server_status="failed"

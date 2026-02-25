@@ -22,11 +22,12 @@ CLI_BIN="${CLI_BIN:-$LLAMA_DIR/build/bin/llama-cli}"
 
 MODEL_PATH="${MODEL_PATH:-$HOME/.cache/llama.cpp/unsloth_Qwen3-14B-GGUF_Qwen3-14B-Q4_K_M.gguf}"
 MODE="${MODE:-full}" # smoke | full | exhaustive
-PORT="${PORT:-18080}"
+PORT="${PORT:-8080}"
 STARTUP_TIMEOUT="${STARTUP_TIMEOUT:-180}"
 MAX_TOKENS="${MAX_TOKENS:-180}"
 MAX_CASES="${MAX_CASES:-0}" # 0 = no cap
 RUN_LLAMA_BENCH="${RUN_LLAMA_BENCH:-1}"
+RESUME="${RESUME:-1}" # 1 = resume from existing results.csv in OUT_DIR
 
 OUT_DIR="${OUT_DIR:-$ROOT_DIR/archieve/qwen14b_regression_$(date +%Y%m%d_%H%M%S)}"
 mkdir -p "$OUT_DIR" "$OUT_DIR/logs"
@@ -185,6 +186,49 @@ print(p1, e1, p2, e2, load_sec)
 PY
 }
 
+load_resume_state() {
+  local csv_file="$1"
+  local keys_out_file="$2"
+  python3 - "$csv_file" "$keys_out_file" <<'PY'
+import csv
+import sys
+
+csv_file = sys.argv[1]
+keys_out = sys.argv[2]
+
+max_case = 0
+rows = 0
+keys = []
+
+with open(csv_file, newline='', encoding='utf-8') as f:
+  reader = csv.DictReader(f)
+  for row in reader:
+    rows += 1
+    try:
+      max_case = max(max_case, int(row.get('case_id') or 0))
+    except Exception:
+      pass
+
+    key = "|".join([
+      row.get('threads', ''),
+      row.get('ngl', ''),
+      row.get('ctx', ''),
+      row.get('batch', ''),
+      row.get('ubatch', ''),
+      row.get('cache_k', ''),
+      row.get('cache_v', ''),
+      row.get('fa', ''),
+    ])
+    keys.append(key)
+
+with open(keys_out, 'w', encoding='utf-8') as f:
+  for k in keys:
+    f.write(k + "\n")
+
+print(max_case, rows)
+PY
+}
+
 run_case() {
   local case_id="$1"
   local threads="$2"
@@ -307,15 +351,32 @@ if [[ "$RUN_LLAMA_BENCH" == "1" && -x "$BENCH_BIN" ]]; then
   } > "$LLAMA_BENCH_LOG" 2>&1 || true
 fi
 
-cat > "$RESULTS_CSV" <<'CSV'
-case_id,status,error,threads,ngl,ctx,batch,ubatch,cache_k,cache_v,fa,prompt_tps_1,eval_tps_1,prompt_tps_2,eval_tps_2,fit_load_sec,log_file
-CSV
-
 echo "Output dir: $OUT_DIR"
 echo "Results CSV: $RESULTS_CSV"
 
+declare -A DONE_KEYS=()
 declare -i case_id=0
 declare -i executed_cases=0
+declare -i resume_skipped=0
+
+if [[ "$RESUME" == "1" && -f "$RESULTS_CSV" ]]; then
+  resume_keys_file="$OUT_DIR/.resume_keys.txt"
+  read -r resume_max_case resume_rows < <(load_resume_state "$RESULTS_CSV" "$resume_keys_file")
+
+  case_id="$resume_max_case"
+  executed_cases="$resume_rows"
+
+  while IFS= read -r k; do
+    [[ -n "$k" ]] && DONE_KEYS["$k"]=1
+  done < "$resume_keys_file"
+  rm -f "$resume_keys_file"
+
+  echo "Resume mode: found $executed_cases existing cases (max case_id=$case_id), skipping completed combos."
+else
+  cat > "$RESULTS_CSV" <<'CSV'
+case_id,status,error,threads,ngl,ctx,batch,ubatch,cache_k,cache_v,fa,prompt_tps_1,eval_tps_1,prompt_tps_2,eval_tps_2,fit_load_sec,log_file
+CSV
+fi
 
 auto_skip=0
 for threads in "${THREAD_ARR[@]}"; do
@@ -329,6 +390,13 @@ for threads in "${THREAD_ARR[@]}"; do
           for kv in "${KV_ARR[@]}"; do
             IFS=':' read -r cache_k cache_v <<< "$kv"
             for fa in "${FA_ARR[@]}"; do
+              combo_key="${threads}|${ngl}|${ctx}|${batch}|${ubatch}|${cache_k}|${cache_v}|${fa}"
+
+              if [[ -n "${DONE_KEYS[$combo_key]+x}" ]]; then
+                resume_skipped=$((resume_skipped + 1))
+                continue
+              fi
+
               # Known constraint in llama.cpp: quantized V cache requires flash attention.
               if [[ "$fa" == "off" && "$cache_v" != "f16" && "$cache_v" != "f32" && "$cache_v" != "bf16" ]]; then
                 auto_skip=$((auto_skip + 1))
@@ -345,6 +413,7 @@ for threads in "${THREAD_ARR[@]}"; do
 
               echo "[case $case_id] t=$threads ngl=$ngl ctx=$ctx b=$batch ub=$ubatch kv=$cache_k/$cache_v fa=$fa"
               run_case "$case_id" "$threads" "$ngl" "$ctx" "$batch" "$ubatch" "$cache_k" "$cache_v" "$fa"
+              DONE_KEYS["$combo_key"]=1
             done
           done
         done
@@ -356,6 +425,7 @@ done
 echo
 echo "Completed cases: $executed_cases"
 echo "Auto-skipped invalid combos: $auto_skip"
+echo "Resume-skipped completed combos: $resume_skipped"
 
 echo
 echo "Top 15 by eval_tps_2"
@@ -461,3 +531,5 @@ echo "- $BEST_CSV"
 if [[ -f "$LLAMA_BENCH_LOG" ]]; then
   echo "- $LLAMA_BENCH_LOG"
 fi
+
+#  MODE=exhaustive OUT_DIR=/home/nav_wsl/code/learn_llama_cpp/archieve/qwen14b_regression_20260226_013044 RESUME=1  ./qwen14b_regression_benchmark.sh

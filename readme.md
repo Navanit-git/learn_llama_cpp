@@ -15,7 +15,7 @@ A hands-on, machine-based learning path for running and building on top of `llam
 | 1 | Core Environment Setup | ✅ Done | [phase_1_detailed_logs.md](phase_1_detailed_logs.md) |
 | 2 | Python Environment & Dependencies | ✅ Done | [phase_2_detailed_logs.md](phase_2_detailed_logs.md) |
 | 3 | GPT-OSS First Inference | ✅ Done | [phase_3_gpt_oss_runbook.md](phase_3_gpt_oss_runbook.md) |
-| 4 | GGUF Quantization Variant Exploration | 🔲 Next | [quantization_reference.md](quantization_reference.md) |
+| 4 | GGUF Quantization Variant Exploration | 🔄 In Progress | [phase_4_detailed_logs.md](phase_4_detailed_logs.md) |
 | 5 | Native Inference Deep Dive | 🔲 Planned | — |
 | 6 | DevOps — `llama-server` as a System Service | 🔲 Planned | — |
 | 7 | API Integration — FastAPI Chatbot | 🔲 Planned | — |
@@ -71,6 +71,7 @@ Download raw `safetensors` weights, convert with `convert_hf_to_gguf.py`, quanti
 | [lessons_learned.md](lessons_learned.md) | Build flag findings, runtime tuning, and performance tables from Phases 1–3 |
 | [reference_guides.md](reference_guides.md) | Article summaries and external resource notes |
 | [quantization_reference.md](quantization_reference.md) | GGUF quant naming, model candidates, and benchmark commands for Phase 4 |
+| [phase_4_detailed_logs.md](phase_4_detailed_logs.md) | Phase 4 execution log |
 | [phase_1_detailed_logs.md](phase_1_detailed_logs.md) | Phase 1 execution log |
 | [phase_2_detailed_logs.md](phase_2_detailed_logs.md) | Phase 2 execution log |
 | [phase_3_gpt_oss_runbook.md](phase_3_gpt_oss_runbook.md) | Phase 3 execution log |

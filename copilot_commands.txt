@@ -69,3 +69,10 @@ cmake --build build -j10
   -ctk q8_0 -ctv q8_0 \
   --host 0.0.0.0 --port 8080 \
   > /home/nav_wsl/code/learn_llama_cpp/terminal_v4.log 2>&1
+
+
+  kill -9 3821 3852 3853 2>/dev/null; echo "killed"; ps aux | grep -E "llama|phase4" | grep -v grep || true
+
+  free -h && echo "---" && nvidia-smi --query-gpu=memory.total,memory.free --format=csv,noheader
+
+   ps aux | grep -E "llama|phase4" | grep -v grep

@@ -1,0 +1,71 @@
+lscpu | grep -E "Model name|CPU\(s\):|Thread|Core|Socket|Flags"; free -h; df -h /; nvidia-smi || lspci | grep -i vga; gcc --version || echo "gcc not found"; cmake --version || echo "cmake not found"; make --version || echo "make not found"
+
+nvcc --version || echo "nvcc not found"
+
+sudo apt update && sudo apt install -y cmake nvidia-cuda-toolkit
+
+cmd.exe /c "echo [wsl2] > %USERPROFILE%\.wslconfig && echo memory=16GB >> %USERPROFILE%\.wslconfig && echo processors=12 >> %USERPROFILE%\.wslconfig && type %USERPROFILE%\.wslconfig"
+
+free -h; lscpu | grep -E "CPU\(s\):|Thread|Core"; nvidia-smi || lspci | grep -i vgas
+
+cd /home/nav_wsl/code/learn_llama_cpp/llama.cpp && rm -rf build && cmake -S . -B build -DGGML_CUDA=ON -DCMAKE_CUDA_HOST_COMPILER=/usr/bin/g++-10
+
+cd /home/nav_wsl/code/learn_llama_cpp/llama.cpp && cmake -S . -B build -DGGML_CUDA=ON -DCMAKE_CUDA_HOST_COMPILER=/usr/bin/g++-10
+
+cd /home/nav_wsl/code/learn_llama_cpp/llama.cpp && cmake --build build -j12
+
+chmod +x phase1_check.sh && ./phase1_check.sh | sed -n '1,50p'
+
+./llama.cpp/build/bin/llama-server -hf ggml-org/gpt-oss-20b-GGUF --ctx-size 4096 --jinja -ub 256 -b 256 --n-cpu-moe 28 -fa aut
+
+./llama.cpp/build/bin/llama-server -m /home/nav_wsl/.cache/llama.cpp/ggml-org_gpt-oss-20b-GGUF_gpt-oss-20b-mxfp4.gguf --ctx-size 8096 --jinja -ub 256 -b 256 --n-cpu-moe 28 -fa auto -ngl 18 --host 0.0.0.0 --verbose --port 8080
+
+./llama.cpp/build/bin/llama-server \
+  -m /home/nav_wsl/.cache/llama.cpp/ggml-org_gpt-oss-20b-GGUF_gpt-oss-20b-mxfp4.gguf \
+  --ctx-size 20000 --jinja -ub 256 -b 256 \
+  --n-cpu-moe 28 -fa auto -ngl 25 \
+  --host 0.0.0.0 --verbose --port 8080 \
+  > terminal_v1.log 2>&1
+
+
+  ./llama.cpp/build/bin/llama-server \
+  -m /home/nav_wsl/.cache/llama.cpp/ggml-org_gpt-oss-20b-GGUF_gpt-oss-20b-mxfp4.gguf \
+  --ctx-size 20000 --jinja \
+  -b 512 -ub 512 \
+  -t 10 -tb 10 \
+  --n-cpu-moe 32 -np 1 \
+  -fa auto -ngl 99 \
+  --host 0.0.0.0 --port 8080 \
+  > terminal_v2.log 2>&1
+
+
+cd /home/nav_wsl/code/learn_llama_cpp/llama.cpp
+rm -rf build
+cmake -S . -B build \
+  -DGGML_CUDA=ON \
+  -DCMAKE_CUDA_HOST_COMPILER=/usr/bin/g++-10 \
+  -DGGML_CUDA_FORCE_MMQ=ON \
+  -DCMAKE_CUDA_ARCHITECTURES="75"
+cmake --build build -j10
+
+
+./build/bin/llama-server \
+  -m /home/nav_wsl/.cache/llama.cpp/ggml-org_gpt-oss-20b-GGUF_gpt-oss-20b-mxfp4.gguf \
+  --ctx-size 20000 --jinja \
+  -b 512 -ub 512 \
+  -t 10 -tb 10 \
+  --n-cpu-moe 32 -np 1 \
+  -fa auto -ngl 99 \
+  -ctk q8_0 -ctv q8_0 \
+  --host 0.0.0.0 --port 8080
+
+  ./build/bin/llama-server \
+  -m /home/nav_wsl/.cache/llama.cpp/ggml-org_gpt-oss-20b-GGUF_gpt-oss-20b-mxfp4.gguf \
+  --ctx-size 20000 --jinja \
+  -b 512 -ub 512 \
+  -t 10 -tb 10 \
+  --n-cpu-moe 32 -np 1 \
+  -fa auto -ngl 99 \
+  -ctk q8_0 -ctv q8_0 \
+  --host 0.0.0.0 --port 8080 \
+  > /home/nav_wsl/code/learn_llama_cpp/terminal_v4.log 2>&1

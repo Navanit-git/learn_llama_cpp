@@ -1,0 +1,5 @@
+archieve/
+build/
+llama.cpp/
+.venv/
+.vscode/

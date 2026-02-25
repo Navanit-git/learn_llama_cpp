@@ -132,6 +132,14 @@ bytes_to_gib() {
   python3 -c "b=int('$1'); print(f'{b/(1024**3):.2f}')"
 }
 
+csv_escape() {
+  local s="${1:-}"
+  s="${s//$'\r'/ }"
+  s="${s//$'\n'/\\n}"
+  s="${s//\"/\"\"}"
+  printf '"%s"' "$s"
+}
+
 # ── Speed & timing parsers ────────────────────────────────────────────────────
 
 extract_speed_from_cli_log() {
@@ -211,6 +219,77 @@ m = re.search(r'\((\d+)\s*=\s*(\d+)\s*\+\s*(\d+)\s*\+\s*(\d+)\)', line)
 if not m:
     print('NA NA NA NA'); raise SystemExit(0)
 print(*m.groups())
+PY
+}
+
+# Extracts a readable assistant response from llama-cli logs.
+# Returns a single-line string (or NA) suitable for CSV storage.
+extract_llm_response_from_cli_log() {
+  local log_file="$1"
+  python3 - "$log_file" <<'PY'
+import re, sys
+
+try:
+  lines = open(sys.argv[1], 'r', encoding='utf-8', errors='ignore').read().splitlines()
+except Exception:
+  print('NA')
+  raise SystemExit(0)
+
+out = []
+for raw in lines:
+  line = raw.strip()
+  if not line:
+    continue
+
+  # Remove most infrastructure/noise lines
+  if re.match(r'^(llama|ggml|main|build|system_info|sampling|generate|common)\b', line, re.IGNORECASE):
+    continue
+  if line.startswith(('Device ', 'Consider compiling with ', 'model      :', 'modalities :', 'available commands:')):
+    continue
+  if line.startswith('/exit ') or line.startswith('/regen') or line.startswith('/clear') or line.startswith('/read'):
+    continue
+  if line in ('Loading model...', 'Exiting...'):
+    continue
+  if 'memory breakdown' in line:
+    continue
+  if re.match(r'^\[\s*Prompt:.*\|\s*Generation:.*\]$', line):
+    continue
+
+  # Strip REPL-style markers
+  if line.startswith('> '):
+    line = line[2:].strip()
+
+  # Keep actual content, drop chat role labels
+  if line.startswith('User:') or line.startswith('Assistant:'):
+    continue
+
+  out.append(line)
+
+if not out:
+  print('NA')
+else:
+  text = ' '.join(out)
+  # keep CSV readable
+  print(text[:4000])
+PY
+}
+
+# Extract server assistant text content (if present) from OpenAI-style response JSON.
+extract_server_response_text() {
+  local response_json="$1"
+  python3 - "$response_json" <<'PY'
+import json, sys
+try:
+  data = json.load(open(sys.argv[1], 'r', encoding='utf-8', errors='ignore'))
+  choices = data.get('choices', [])
+  msg = choices[0].get('message', {}) if choices else {}
+  content = msg.get('content', '')
+  if isinstance(content, list):
+    content = ' '.join(str(x) for x in content)
+  content = str(content).strip()
+  print(content[:4000] if content else 'NA')
+except Exception:
+  print('NA')
 PY
 }
 
@@ -363,14 +442,28 @@ exp_name   = sys.argv[2]
 exp_args_s = sys.argv[3]
 
 try:
-    text     = open(raw_file).read()
+    text     = open(raw_file, encoding='utf-8', errors='ignore').read()
     exp_args = json.loads(exp_args_s)
 
-    # Try to extract first JSON object from text
-    m = re.search(r'\{.*\}', text, re.DOTALL)
-    if not m:
+    # Focus on content after assistant marker when present
+    marker = 'Assistant:'
+    start_text = text.split(marker, 1)[1] if marker in text else text
+
+    # Extract first valid JSON object using a decoder to avoid greedy regex issues
+    dec = json.JSONDecoder()
+    obj = None
+    for m in re.finditer(r'\{', start_text):
+        i = m.start()
+        try:
+            candidate, _ = dec.raw_decode(start_text[i:])
+            if isinstance(candidate, dict):
+                obj = candidate
+                break
+        except Exception:
+            continue
+
+    if obj is None:
         print("0 0 fail:no_json"); raise SystemExit
-    obj = json.loads(m.group(0))
 
     got_name = obj.get("name", "")
     got_args = obj.get("arguments", {})
@@ -517,11 +610,11 @@ variant,model_file,size_bytes,size_gib,download_status,model_load_time_s,queries
 CSV
 
 cat > "$QUERY_CSV" <<'CSV'
-variant,query_id,query_text,cli_status,prefill_tps,generation_tps,ttft_ms,cuda_total_mb,cuda_model_mb,cuda_context_mb,cuda_compute_mb,gpu_mem_peak_mb,gpu_mem_avg_mb,gpu_mem_delta_mb,gpu_before_mb,gpu_total_mb,gpu_util_before_pct,gpu_temp_before_c,gpu_power_before_w,gpu_clock_before_mhz,gpu_after_mb,gpu_util_after_pct,gpu_temp_after_c,gpu_power_after_w,gpu_clock_after_mhz,thermal_throttle,cpu_usage_before_pct,cpu_usage_after_pct,ram_avail_before_mb,ram_avail_after_mb,query_log
+variant,query_id,query_text,cli_status,prefill_tps,generation_tps,ttft_ms,cuda_total_mb,cuda_model_mb,cuda_context_mb,cuda_compute_mb,gpu_mem_peak_mb,gpu_mem_avg_mb,gpu_mem_delta_mb,gpu_before_mb,gpu_total_mb,gpu_util_before_pct,gpu_temp_before_c,gpu_power_before_w,gpu_clock_before_mhz,gpu_after_mb,gpu_util_after_pct,gpu_temp_after_c,gpu_power_after_w,gpu_clock_after_mhz,thermal_throttle,cpu_usage_before_pct,cpu_usage_after_pct,ram_avail_before_mb,ram_avail_after_mb,response_text,query_log
 CSV
 
 cat > "$TOOL_CSV" <<'CSV'
-variant,method,tool_call_user_msg,expected_name,expected_args,name_ok,args_ok,status,raw_log
+variant,method,tool_call_user_msg,expected_name,expected_args,name_ok,args_ok,status,response_text,raw_log
 CSV
 
 # ─── Main loop ────────────────────────────────────────────────────────────────
@@ -660,6 +753,7 @@ for variant in "${VARIANTS[@]}"; do
                                           < <(extract_cuda_memory_from_cli_log "$query_log")
     read -r gpu_peak_mb gpu_avg_mb gpu_delta_mb \
                                           < <(compute_gpu_mem_stats           "$gpu_poll_file")
+    response_text="$(extract_llm_response_from_cli_log "$query_log")"
 
     # Thermal throttle: compare clock before vs after
     thermal_throttle="$(detect_thermal_throttle "$gpu_clock_before" "$gpu_clock_after")"
@@ -678,7 +772,7 @@ for variant in "${VARIANTS[@]}"; do
     fi
 
     # Write query CSV row
-    echo "${variant},${query_idx},\"${q//\"/\"\"}\",${cli_status},${prefill_tps},${generation_tps},${ttft_ms},${cuda_total_mb},${cuda_model_mb},${cuda_context_mb},${cuda_compute_mb},${gpu_peak_mb},${gpu_avg_mb},${gpu_delta_mb},${gpu_before_mb},${gpu_total_mb},${gpu_util_before},${gpu_temp_before},${gpu_power_before},${gpu_clock_before},${gpu_after_mb},${gpu_util_after},${gpu_temp_after},${gpu_power_after},${gpu_clock_after},${thermal_throttle},${cpu_before},${cpu_after},${ram_before},${ram_after},${query_log}" \
+    echo "${variant},${query_idx},$(csv_escape "$q"),${cli_status},${prefill_tps},${generation_tps},${ttft_ms},${cuda_total_mb},${cuda_model_mb},${cuda_context_mb},${cuda_compute_mb},${gpu_peak_mb},${gpu_avg_mb},${gpu_delta_mb},${gpu_before_mb},${gpu_total_mb},${gpu_util_before},${gpu_temp_before},${gpu_power_before},${gpu_clock_before},${gpu_after_mb},${gpu_util_after},${gpu_temp_after},${gpu_power_after},${gpu_clock_after},${thermal_throttle},${cpu_before},${cpu_after},${ram_before},${ram_after},$(csv_escape "$response_text"),$(csv_escape "$query_log")" \
       >> "$QUERY_CSV"
 
     echo "  Q${query_idx} status=${cli_status} | prefill=${prefill_tps} t/s | gen=${generation_tps} t/s | TTFT=${ttft_ms}ms | throttle=${thermal_throttle} | GPU peak=${gpu_peak_mb}MB delta=${gpu_delta_mb}MB | temp=${gpu_temp_after}°C | power=${gpu_power_after}W" \
@@ -696,7 +790,8 @@ for variant in "${VARIANTS[@]}"; do
   read -r server_status tool_server_name_ok tool_server_args_ok tool_server_status \
     < <(run_server_and_tool_test "$model_path" "$server_log" "$port" "$tool_server_resp") || true
 
-  echo "${variant},server,\"$TOOL_CALL_USER_MSG\",\"$TOOL_EXPECTED_NAME\",\"$TOOL_EXPECTED_ARGS\",${tool_server_name_ok},${tool_server_args_ok},${tool_server_status},${tool_server_resp}" \
+  tool_server_response_text="$(extract_server_response_text "$tool_server_resp")"
+  echo "${variant},server,$(csv_escape "$TOOL_CALL_USER_MSG"),$(csv_escape "$TOOL_EXPECTED_NAME"),$(csv_escape "$TOOL_EXPECTED_ARGS"),${tool_server_name_ok},${tool_server_args_ok},${tool_server_status},$(csv_escape "$tool_server_response_text"),$(csv_escape "$tool_server_resp")" \
     >> "$TOOL_CSV"
 
   # ── Show server tool call raw response in terminal
@@ -720,9 +815,11 @@ except Exception:
   tool_cli_args_ok=0
 
   set +e
-  timeout "$QUERY_TIMEOUT_SEC" "$LLAMA_CLI_BIN" \
+  timeout --kill-after=10s "$QUERY_TIMEOUT_SEC" "$LLAMA_CLI_BIN" \
     -m "$model_path" \
     -p "$TOOL_CLI_PROMPT" \
+    -st \
+    --simple-io \
     -n 128 \
     -t "$THREADS" \
     -ngl "$N_GPU_LAYERS" \
@@ -734,9 +831,19 @@ except Exception:
     -ctv "$CACHE_TYPE_V" \
     --temp 0.0 \
     --no-display-prompt \
-    --simple-io \
     < /dev/null > "$tool_cli_log" 2>&1
+  tool_cli_rc=$?
   set -e
+
+  if [[ $tool_cli_rc -eq 0 ]]; then
+    tool_cli_status="ok"
+  elif [[ $tool_cli_rc -eq 124 || $tool_cli_rc -eq 137 ]]; then
+    tool_cli_status="timeout"
+  else
+    tool_cli_status="failed"
+  fi
+
+  echo "  CLI tool call exit: rc=${tool_cli_rc} status=${tool_cli_status}" | tee -a "$RUN_LOG"
 
   # ── Show CLI tool call raw output in terminal
   echo "  --- Tool call (cli) raw model output ---" | tee -a "$RUN_LOG"
@@ -744,10 +851,19 @@ except Exception:
     | tee -a "$RUN_LOG" || true
   echo "  ---" | tee -a "$RUN_LOG"
 
-  read -r tool_cli_name_ok tool_cli_args_ok tool_cli_status \
-    < <(validate_cli_tool_call "$tool_cli_log") || true
+  if [[ "$tool_cli_status" == "ok" ]]; then
+    validator_out="$(validate_cli_tool_call "$tool_cli_log" 2>/dev/null || true)"
+    if [[ -n "$validator_out" ]]; then
+      read -r tool_cli_name_ok tool_cli_args_ok tool_cli_status <<< "$validator_out"
+    else
+      tool_cli_name_ok=0
+      tool_cli_args_ok=0
+      tool_cli_status="error:validator_no_output"
+    fi
+  fi
 
-  echo "${variant},cli,\"$TOOL_CALL_USER_MSG\",\"$TOOL_EXPECTED_NAME\",\"$TOOL_EXPECTED_ARGS\",${tool_cli_name_ok},${tool_cli_args_ok},${tool_cli_status},${tool_cli_log}" \
+  tool_cli_response_text="$(extract_llm_response_from_cli_log "$tool_cli_log")"
+  echo "${variant},cli,$(csv_escape "$TOOL_CALL_USER_MSG"),$(csv_escape "$TOOL_EXPECTED_NAME"),$(csv_escape "$TOOL_EXPECTED_ARGS"),${tool_cli_name_ok},${tool_cli_args_ok},${tool_cli_status},$(csv_escape "$tool_cli_response_text"),$(csv_escape "$tool_cli_log")" \
     >> "$TOOL_CSV"
 
   echo "  Server: ${server_status} | Tool (server): name=${tool_server_name_ok} args=${tool_server_args_ok} -> ${tool_server_status}" | tee -a "$RUN_LOG"

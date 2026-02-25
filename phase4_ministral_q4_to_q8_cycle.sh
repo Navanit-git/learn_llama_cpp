@@ -636,7 +636,7 @@ for variant in "${VARIANTS[@]}"; do
         --temp 0.2 \
         --top-p 0.95 \
         --no-display-prompt \
-        > "$query_log" 2>&1; then
+        < /dev/null > "$query_log" 2>&1; then
       cli_status="failed"
     fi
 
@@ -735,7 +735,7 @@ except Exception:
     --temp 0.0 \
     --no-display-prompt \
     --simple-io \
-    > "$tool_cli_log" 2>&1
+    < /dev/null > "$tool_cli_log" 2>&1
   set -e
 
   # ── Show CLI tool call raw output in terminal

@@ -1,0 +1,959 @@
+gguf_ex_read_0: version:      3
+gguf_ex_read_0: alignment:   32
+gguf_ex_read_0: data offset: 10968224
+gguf_ex_read_0: n_kv: 46
+gguf_ex_read_0: kv[0]: key = general.architecture
+gguf_ex_read_0: kv[1]: key = general.type
+gguf_ex_read_0: kv[2]: key = general.name
+gguf_ex_read_0: kv[3]: key = general.basename
+gguf_ex_read_0: kv[4]: key = general.quantized_by
+gguf_ex_read_0: kv[5]: key = general.size_label
+gguf_ex_read_0: kv[6]: key = general.license
+gguf_ex_read_0: kv[7]: key = general.license.link
+gguf_ex_read_0: kv[8]: key = general.repo_url
+gguf_ex_read_0: kv[9]: key = general.base_model.count
+gguf_ex_read_0: kv[10]: key = general.base_model.0.name
+gguf_ex_read_0: kv[11]: key = general.base_model.0.organization
+gguf_ex_read_0: kv[12]: key = general.base_model.0.repo_url
+gguf_ex_read_0: kv[13]: key = general.tags
+gguf_ex_read_0: kv[14]: key = qwen35.block_count
+gguf_ex_read_0: kv[15]: key = qwen35.context_length
+gguf_ex_read_0: kv[16]: key = qwen35.embedding_length
+gguf_ex_read_0: kv[17]: key = qwen35.feed_forward_length
+gguf_ex_read_0: kv[18]: key = qwen35.attention.head_count
+gguf_ex_read_0: kv[19]: key = qwen35.attention.head_count_kv
+gguf_ex_read_0: kv[20]: key = qwen35.rope.dimension_sections
+gguf_ex_read_0: kv[21]: key = qwen35.rope.freq_base
+gguf_ex_read_0: kv[22]: key = qwen35.attention.layer_norm_rms_epsilon
+gguf_ex_read_0: kv[23]: key = qwen35.attention.key_length
+gguf_ex_read_0: kv[24]: key = qwen35.attention.value_length
+gguf_ex_read_0: kv[25]: key = qwen35.ssm.conv_kernel
+gguf_ex_read_0: kv[26]: key = qwen35.ssm.state_size
+gguf_ex_read_0: kv[27]: key = qwen35.ssm.group_count
+gguf_ex_read_0: kv[28]: key = qwen35.ssm.time_step_rank
+gguf_ex_read_0: kv[29]: key = qwen35.ssm.inner_size
+gguf_ex_read_0: kv[30]: key = qwen35.full_attention_interval
+gguf_ex_read_0: kv[31]: key = qwen35.rope.dimension_count
+gguf_ex_read_0: kv[32]: key = tokenizer.ggml.model
+gguf_ex_read_0: kv[33]: key = tokenizer.ggml.pre
+gguf_ex_read_0: kv[34]: key = tokenizer.ggml.tokens
+gguf_ex_read_0: kv[35]: key = tokenizer.ggml.token_type
+gguf_ex_read_0: kv[36]: key = tokenizer.ggml.merges
+gguf_ex_read_0: kv[37]: key = tokenizer.ggml.eos_token_id
+gguf_ex_read_0: kv[38]: key = tokenizer.ggml.padding_token_id
+gguf_ex_read_0: kv[39]: key = tokenizer.chat_template
+gguf_ex_read_0: kv[40]: key = general.quantization_version
+gguf_ex_read_0: kv[41]: key = general.file_type
+gguf_ex_read_0: kv[42]: key = quantize.imatrix.file
+gguf_ex_read_0: kv[43]: key = quantize.imatrix.dataset
+gguf_ex_read_0: kv[44]: key = quantize.imatrix.entries_count
+gguf_ex_read_0: kv[45]: key = quantize.imatrix.chunks_count
+gguf_ex_read_0: find key: some.parameter.string not found.
+gguf_ex_read_0: n_tensors: 426
+gguf_ex_read_0: tensor[0]: name = output_norm.weight, size = 10240, offset = 0
+gguf_ex_read_0: tensor[1]: name = token_embd.weight, size = 675430400, offset = 10240
+gguf_ex_read_0: tensor[2]: name = blk.0.attn_gate.weight, size = 11141120, offset = 675440640
+gguf_ex_read_0: tensor[3]: name = blk.0.attn_norm.weight, size = 10240, offset = 686581760
+gguf_ex_read_0: tensor[4]: name = blk.0.attn_qkv.weight, size = 22282240, offset = 686592000
+gguf_ex_read_0: tensor[5]: name = blk.0.ffn_down.weight, size = 25067520, offset = 708874240
+gguf_ex_read_0: tensor[6]: name = blk.0.ffn_gate.weight, size = 25067520, offset = 733941760
+gguf_ex_read_0: tensor[7]: name = blk.0.ffn_up.weight, size = 25067520, offset = 759009280
+gguf_ex_read_0: tensor[8]: name = blk.0.post_attention_norm.weight, size = 10240, offset = 784076800
+gguf_ex_read_0: tensor[9]: name = blk.0.ssm_a, size = 128, offset = 784087040
+gguf_ex_read_0: tensor[10]: name = blk.0.ssm_alpha.weight, size = 87040, offset = 784087168
+gguf_ex_read_0: tensor[11]: name = blk.0.ssm_beta.weight, size = 87040, offset = 784174208
+gguf_ex_read_0: tensor[12]: name = blk.0.ssm_conv1d.weight, size = 131072, offset = 784261248
+gguf_ex_read_0: tensor[13]: name = blk.0.ssm_dt.bias, size = 128, offset = 784392320
+gguf_ex_read_0: tensor[14]: name = blk.0.ssm_norm.weight, size = 512, offset = 784392448
+gguf_ex_read_0: tensor[15]: name = blk.0.ssm_out.weight, size = 11141120, offset = 784392960
+gguf_ex_read_0: tensor[16]: name = blk.1.attn_gate.weight, size = 11141120, offset = 795534080
+gguf_ex_read_0: tensor[17]: name = blk.1.attn_norm.weight, size = 10240, offset = 806675200
+gguf_ex_read_0: tensor[18]: name = blk.1.attn_qkv.weight, size = 22282240, offset = 806685440
+gguf_ex_read_0: tensor[19]: name = blk.1.ffn_down.weight, size = 25067520, offset = 828967680
+gguf_ex_read_0: tensor[20]: name = blk.1.ffn_gate.weight, size = 25067520, offset = 854035200
+gguf_ex_read_0: tensor[21]: name = blk.1.ffn_up.weight, size = 25067520, offset = 879102720
+gguf_ex_read_0: tensor[22]: name = blk.1.post_attention_norm.weight, size = 10240, offset = 904170240
+gguf_ex_read_0: tensor[23]: name = blk.1.ssm_a, size = 128, offset = 904180480
+gguf_ex_read_0: tensor[24]: name = blk.1.ssm_alpha.weight, size = 87040, offset = 904180608
+gguf_ex_read_0: tensor[25]: name = blk.1.ssm_beta.weight, size = 87040, offset = 904267648
+gguf_ex_read_0: tensor[26]: name = blk.1.ssm_conv1d.weight, size = 131072, offset = 904354688
+gguf_ex_read_0: tensor[27]: name = blk.1.ssm_dt.bias, size = 128, offset = 904485760
+gguf_ex_read_0: tensor[28]: name = blk.1.ssm_norm.weight, size = 512, offset = 904485888
+gguf_ex_read_0: tensor[29]: name = blk.1.ssm_out.weight, size = 11141120, offset = 904486400
+gguf_ex_read_0: tensor[30]: name = blk.2.attn_gate.weight, size = 11141120, offset = 915627520
+gguf_ex_read_0: tensor[31]: name = blk.2.attn_norm.weight, size = 10240, offset = 926768640
+gguf_ex_read_0: tensor[32]: name = blk.2.attn_qkv.weight, size = 22282240, offset = 926778880
+gguf_ex_read_0: tensor[33]: name = blk.2.ffn_down.weight, size = 25067520, offset = 949061120
+gguf_ex_read_0: tensor[34]: name = blk.2.ffn_gate.weight, size = 25067520, offset = 974128640
+gguf_ex_read_0: tensor[35]: name = blk.2.ffn_up.weight, size = 25067520, offset = 999196160
+gguf_ex_read_0: tensor[36]: name = blk.2.post_attention_norm.weight, size = 10240, offset = 1024263680
+gguf_ex_read_0: tensor[37]: name = blk.2.ssm_a, size = 128, offset = 1024273920
+gguf_ex_read_0: tensor[38]: name = blk.2.ssm_alpha.weight, size = 87040, offset = 1024274048
+gguf_ex_read_0: tensor[39]: name = blk.2.ssm_beta.weight, size = 87040, offset = 1024361088
+gguf_ex_read_0: tensor[40]: name = blk.2.ssm_conv1d.weight, size = 131072, offset = 1024448128
+gguf_ex_read_0: tensor[41]: name = blk.2.ssm_dt.bias, size = 128, offset = 1024579200
+gguf_ex_read_0: tensor[42]: name = blk.2.ssm_norm.weight, size = 512, offset = 1024579328
+gguf_ex_read_0: tensor[43]: name = blk.2.ssm_out.weight, size = 11141120, offset = 1024579840
+gguf_ex_read_0: tensor[44]: name = blk.3.attn_k.weight, size = 2785280, offset = 1035720960
+gguf_ex_read_0: tensor[45]: name = blk.3.attn_k_norm.weight, size = 1024, offset = 1038506240
+gguf_ex_read_0: tensor[46]: name = blk.3.attn_norm.weight, size = 10240, offset = 1038507264
+gguf_ex_read_0: tensor[47]: name = blk.3.attn_output.weight, size = 11141120, offset = 1038517504
+gguf_ex_read_0: tensor[48]: name = blk.3.attn_q.weight, size = 22282240, offset = 1049658624
+gguf_ex_read_0: tensor[49]: name = blk.3.attn_q_norm.weight, size = 1024, offset = 1071940864
+gguf_ex_read_0: tensor[50]: name = blk.3.attn_v.weight, size = 2785280, offset = 1071941888
+gguf_ex_read_0: tensor[51]: name = blk.3.ffn_down.weight, size = 25067520, offset = 1074727168
+gguf_ex_read_0: tensor[52]: name = blk.3.ffn_gate.weight, size = 25067520, offset = 1099794688
+gguf_ex_read_0: tensor[53]: name = blk.3.ffn_up.weight, size = 25067520, offset = 1124862208
+gguf_ex_read_0: tensor[54]: name = blk.3.post_attention_norm.weight, size = 10240, offset = 1149929728
+gguf_ex_read_0: tensor[55]: name = blk.4.attn_gate.weight, size = 11141120, offset = 1149939968
+gguf_ex_read_0: tensor[56]: name = blk.4.attn_norm.weight, size = 10240, offset = 1161081088
+gguf_ex_read_0: tensor[57]: name = blk.4.attn_qkv.weight, size = 22282240, offset = 1161091328
+gguf_ex_read_0: tensor[58]: name = blk.4.ffn_down.weight, size = 25067520, offset = 1183373568
+gguf_ex_read_0: tensor[59]: name = blk.4.ffn_gate.weight, size = 25067520, offset = 1208441088
+gguf_ex_read_0: tensor[60]: name = blk.4.ffn_up.weight, size = 25067520, offset = 1233508608
+gguf_ex_read_0: tensor[61]: name = blk.4.post_attention_norm.weight, size = 10240, offset = 1258576128
+gguf_ex_read_0: tensor[62]: name = blk.4.ssm_a, size = 128, offset = 1258586368
+gguf_ex_read_0: tensor[63]: name = blk.4.ssm_alpha.weight, size = 87040, offset = 1258586496
+gguf_ex_read_0: tensor[64]: name = blk.4.ssm_beta.weight, size = 87040, offset = 1258673536
+gguf_ex_read_0: tensor[65]: name = blk.4.ssm_conv1d.weight, size = 131072, offset = 1258760576
+gguf_ex_read_0: tensor[66]: name = blk.4.ssm_dt.bias, size = 128, offset = 1258891648
+gguf_ex_read_0: tensor[67]: name = blk.4.ssm_norm.weight, size = 512, offset = 1258891776
+gguf_ex_read_0: tensor[68]: name = blk.4.ssm_out.weight, size = 11141120, offset = 1258892288
+gguf_ex_read_0: tensor[69]: name = blk.5.attn_gate.weight, size = 11141120, offset = 1270033408
+gguf_ex_read_0: tensor[70]: name = blk.5.attn_norm.weight, size = 10240, offset = 1281174528
+gguf_ex_read_0: tensor[71]: name = blk.5.attn_qkv.weight, size = 22282240, offset = 1281184768
+gguf_ex_read_0: tensor[72]: name = blk.5.ffn_down.weight, size = 25067520, offset = 1303467008
+gguf_ex_read_0: tensor[73]: name = blk.5.ffn_gate.weight, size = 25067520, offset = 1328534528
+gguf_ex_read_0: tensor[74]: name = blk.5.ffn_up.weight, size = 25067520, offset = 1353602048
+gguf_ex_read_0: tensor[75]: name = blk.5.post_attention_norm.weight, size = 10240, offset = 1378669568
+gguf_ex_read_0: tensor[76]: name = blk.5.ssm_a, size = 128, offset = 1378679808
+gguf_ex_read_0: tensor[77]: name = blk.5.ssm_alpha.weight, size = 87040, offset = 1378679936
+gguf_ex_read_0: tensor[78]: name = blk.5.ssm_beta.weight, size = 87040, offset = 1378766976
+gguf_ex_read_0: tensor[79]: name = blk.5.ssm_conv1d.weight, size = 131072, offset = 1378854016
+gguf_ex_read_0: tensor[80]: name = blk.5.ssm_dt.bias, size = 128, offset = 1378985088
+gguf_ex_read_0: tensor[81]: name = blk.5.ssm_norm.weight, size = 512, offset = 1378985216
+gguf_ex_read_0: tensor[82]: name = blk.5.ssm_out.weight, size = 11141120, offset = 1378985728
+gguf_ex_read_0: tensor[83]: name = blk.6.attn_gate.weight, size = 11141120, offset = 1390126848
+gguf_ex_read_0: tensor[84]: name = blk.6.attn_norm.weight, size = 10240, offset = 1401267968
+gguf_ex_read_0: tensor[85]: name = blk.6.attn_qkv.weight, size = 22282240, offset = 1401278208
+gguf_ex_read_0: tensor[86]: name = blk.6.ffn_down.weight, size = 25067520, offset = 1423560448
+gguf_ex_read_0: tensor[87]: name = blk.6.ffn_gate.weight, size = 25067520, offset = 1448627968
+gguf_ex_read_0: tensor[88]: name = blk.6.ffn_up.weight, size = 25067520, offset = 1473695488
+gguf_ex_read_0: tensor[89]: name = blk.6.post_attention_norm.weight, size = 10240, offset = 1498763008
+gguf_ex_read_0: tensor[90]: name = blk.6.ssm_a, size = 128, offset = 1498773248
+gguf_ex_read_0: tensor[91]: name = blk.6.ssm_alpha.weight, size = 87040, offset = 1498773376
+gguf_ex_read_0: tensor[92]: name = blk.6.ssm_beta.weight, size = 87040, offset = 1498860416
+gguf_ex_read_0: tensor[93]: name = blk.6.ssm_conv1d.weight, size = 131072, offset = 1498947456
+gguf_ex_read_0: tensor[94]: name = blk.6.ssm_dt.bias, size = 128, offset = 1499078528
+gguf_ex_read_0: tensor[95]: name = blk.6.ssm_norm.weight, size = 512, offset = 1499078656
+gguf_ex_read_0: tensor[96]: name = blk.6.ssm_out.weight, size = 11141120, offset = 1499079168
+gguf_ex_read_0: tensor[97]: name = blk.7.attn_k.weight, size = 2785280, offset = 1510220288
+gguf_ex_read_0: tensor[98]: name = blk.7.attn_k_norm.weight, size = 1024, offset = 1513005568
+gguf_ex_read_0: tensor[99]: name = blk.7.attn_norm.weight, size = 10240, offset = 1513006592
+gguf_ex_read_0: tensor[100]: name = blk.7.attn_output.weight, size = 11141120, offset = 1513016832
+gguf_ex_read_0: tensor[101]: name = blk.7.attn_q.weight, size = 22282240, offset = 1524157952
+gguf_ex_read_0: tensor[102]: name = blk.7.attn_q_norm.weight, size = 1024, offset = 1546440192
+gguf_ex_read_0: tensor[103]: name = blk.7.attn_v.weight, size = 2785280, offset = 1546441216
+gguf_ex_read_0: tensor[104]: name = blk.7.ffn_down.weight, size = 25067520, offset = 1549226496
+gguf_ex_read_0: tensor[105]: name = blk.7.ffn_gate.weight, size = 25067520, offset = 1574294016
+gguf_ex_read_0: tensor[106]: name = blk.7.ffn_up.weight, size = 25067520, offset = 1599361536
+gguf_ex_read_0: tensor[107]: name = blk.7.post_attention_norm.weight, size = 10240, offset = 1624429056
+gguf_ex_read_0: tensor[108]: name = blk.8.attn_gate.weight, size = 11141120, offset = 1624439296
+gguf_ex_read_0: tensor[109]: name = blk.8.attn_norm.weight, size = 10240, offset = 1635580416
+gguf_ex_read_0: tensor[110]: name = blk.8.attn_qkv.weight, size = 22282240, offset = 1635590656
+gguf_ex_read_0: tensor[111]: name = blk.8.ffn_down.weight, size = 25067520, offset = 1657872896
+gguf_ex_read_0: tensor[112]: name = blk.8.ffn_gate.weight, size = 25067520, offset = 1682940416
+gguf_ex_read_0: tensor[113]: name = blk.8.ffn_up.weight, size = 25067520, offset = 1708007936
+gguf_ex_read_0: tensor[114]: name = blk.8.post_attention_norm.weight, size = 10240, offset = 1733075456
+gguf_ex_read_0: tensor[115]: name = blk.8.ssm_a, size = 128, offset = 1733085696
+gguf_ex_read_0: tensor[116]: name = blk.8.ssm_alpha.weight, size = 87040, offset = 1733085824
+gguf_ex_read_0: tensor[117]: name = blk.8.ssm_beta.weight, size = 87040, offset = 1733172864
+gguf_ex_read_0: tensor[118]: name = blk.8.ssm_conv1d.weight, size = 131072, offset = 1733259904
+gguf_ex_read_0: tensor[119]: name = blk.8.ssm_dt.bias, size = 128, offset = 1733390976
+gguf_ex_read_0: tensor[120]: name = blk.8.ssm_norm.weight, size = 512, offset = 1733391104
+gguf_ex_read_0: tensor[121]: name = blk.8.ssm_out.weight, size = 11141120, offset = 1733391616
+gguf_ex_read_0: tensor[122]: name = blk.9.attn_gate.weight, size = 11141120, offset = 1744532736
+gguf_ex_read_0: tensor[123]: name = blk.9.attn_norm.weight, size = 10240, offset = 1755673856
+gguf_ex_read_0: tensor[124]: name = blk.9.attn_qkv.weight, size = 22282240, offset = 1755684096
+gguf_ex_read_0: tensor[125]: name = blk.9.ffn_down.weight, size = 25067520, offset = 1777966336
+gguf_ex_read_0: tensor[126]: name = blk.9.ffn_gate.weight, size = 25067520, offset = 1803033856
+gguf_ex_read_0: tensor[127]: name = blk.9.ffn_up.weight, size = 25067520, offset = 1828101376
+gguf_ex_read_0: tensor[128]: name = blk.9.post_attention_norm.weight, size = 10240, offset = 1853168896
+gguf_ex_read_0: tensor[129]: name = blk.9.ssm_a, size = 128, offset = 1853179136
+gguf_ex_read_0: tensor[130]: name = blk.9.ssm_alpha.weight, size = 87040, offset = 1853179264
+gguf_ex_read_0: tensor[131]: name = blk.9.ssm_beta.weight, size = 87040, offset = 1853266304
+gguf_ex_read_0: tensor[132]: name = blk.9.ssm_conv1d.weight, size = 131072, offset = 1853353344
+gguf_ex_read_0: tensor[133]: name = blk.9.ssm_dt.bias, size = 128, offset = 1853484416
+gguf_ex_read_0: tensor[134]: name = blk.9.ssm_norm.weight, size = 512, offset = 1853484544
+gguf_ex_read_0: tensor[135]: name = blk.9.ssm_out.weight, size = 11141120, offset = 1853485056
+gguf_ex_read_0: tensor[136]: name = blk.10.attn_gate.weight, size = 11141120, offset = 1864626176
+gguf_ex_read_0: tensor[137]: name = blk.10.attn_norm.weight, size = 10240, offset = 1875767296
+gguf_ex_read_0: tensor[138]: name = blk.10.attn_qkv.weight, size = 22282240, offset = 1875777536
+gguf_ex_read_0: tensor[139]: name = blk.10.ffn_down.weight, size = 25067520, offset = 1898059776
+gguf_ex_read_0: tensor[140]: name = blk.10.ffn_gate.weight, size = 25067520, offset = 1923127296
+gguf_ex_read_0: tensor[141]: name = blk.10.ffn_up.weight, size = 25067520, offset = 1948194816
+gguf_ex_read_0: tensor[142]: name = blk.10.post_attention_norm.weight, size = 10240, offset = 1973262336
+gguf_ex_read_0: tensor[143]: name = blk.10.ssm_a, size = 128, offset = 1973272576
+gguf_ex_read_0: tensor[144]: name = blk.10.ssm_alpha.weight, size = 87040, offset = 1973272704
+gguf_ex_read_0: tensor[145]: name = blk.10.ssm_beta.weight, size = 87040, offset = 1973359744
+gguf_ex_read_0: tensor[146]: name = blk.10.ssm_conv1d.weight, size = 131072, offset = 1973446784
+gguf_ex_read_0: tensor[147]: name = blk.10.ssm_dt.bias, size = 128, offset = 1973577856
+gguf_ex_read_0: tensor[148]: name = blk.10.ssm_norm.weight, size = 512, offset = 1973577984
+gguf_ex_read_0: tensor[149]: name = blk.10.ssm_out.weight, size = 11141120, offset = 1973578496
+gguf_ex_read_0: tensor[150]: name = blk.11.attn_k.weight, size = 2785280, offset = 1984719616
+gguf_ex_read_0: tensor[151]: name = blk.11.attn_k_norm.weight, size = 1024, offset = 1987504896
+gguf_ex_read_0: tensor[152]: name = blk.11.attn_norm.weight, size = 10240, offset = 1987505920
+gguf_ex_read_0: tensor[153]: name = blk.11.attn_output.weight, size = 11141120, offset = 1987516160
+gguf_ex_read_0: tensor[154]: name = blk.11.attn_q.weight, size = 22282240, offset = 1998657280
+gguf_ex_read_0: tensor[155]: name = blk.11.attn_q_norm.weight, size = 1024, offset = 2020939520
+gguf_ex_read_0: tensor[156]: name = blk.11.attn_v.weight, size = 2785280, offset = 2020940544
+gguf_ex_read_0: tensor[157]: name = blk.11.ffn_down.weight, size = 25067520, offset = 2023725824
+gguf_ex_read_0: tensor[158]: name = blk.11.ffn_gate.weight, size = 25067520, offset = 2048793344
+gguf_ex_read_0: tensor[159]: name = blk.11.ffn_up.weight, size = 25067520, offset = 2073860864
+gguf_ex_read_0: tensor[160]: name = blk.11.post_attention_norm.weight, size = 10240, offset = 2098928384
+gguf_ex_read_0: tensor[161]: name = blk.12.attn_gate.weight, size = 11141120, offset = 2098938624
+gguf_ex_read_0: tensor[162]: name = blk.12.attn_norm.weight, size = 10240, offset = 2110079744
+gguf_ex_read_0: tensor[163]: name = blk.12.attn_qkv.weight, size = 22282240, offset = 2110089984
+gguf_ex_read_0: tensor[164]: name = blk.12.ffn_down.weight, size = 25067520, offset = 2132372224
+gguf_ex_read_0: tensor[165]: name = blk.12.ffn_gate.weight, size = 25067520, offset = 2157439744
+gguf_ex_read_0: tensor[166]: name = blk.12.ffn_up.weight, size = 25067520, offset = 2182507264
+gguf_ex_read_0: tensor[167]: name = blk.12.post_attention_norm.weight, size = 10240, offset = 2207574784
+gguf_ex_read_0: tensor[168]: name = blk.12.ssm_a, size = 128, offset = 2207585024
+gguf_ex_read_0: tensor[169]: name = blk.12.ssm_alpha.weight, size = 87040, offset = 2207585152
+gguf_ex_read_0: tensor[170]: name = blk.12.ssm_beta.weight, size = 87040, offset = 2207672192
+gguf_ex_read_0: tensor[171]: name = blk.12.ssm_conv1d.weight, size = 131072, offset = 2207759232
+gguf_ex_read_0: tensor[172]: name = blk.12.ssm_dt.bias, size = 128, offset = 2207890304
+gguf_ex_read_0: tensor[173]: name = blk.12.ssm_norm.weight, size = 512, offset = 2207890432
+gguf_ex_read_0: tensor[174]: name = blk.12.ssm_out.weight, size = 11141120, offset = 2207890944
+gguf_ex_read_0: tensor[175]: name = blk.13.attn_gate.weight, size = 11141120, offset = 2219032064
+gguf_ex_read_0: tensor[176]: name = blk.13.attn_norm.weight, size = 10240, offset = 2230173184
+gguf_ex_read_0: tensor[177]: name = blk.13.attn_qkv.weight, size = 22282240, offset = 2230183424
+gguf_ex_read_0: tensor[178]: name = blk.13.ffn_down.weight, size = 25067520, offset = 2252465664
+gguf_ex_read_0: tensor[179]: name = blk.13.ffn_gate.weight, size = 25067520, offset = 2277533184
+gguf_ex_read_0: tensor[180]: name = blk.13.ffn_up.weight, size = 25067520, offset = 2302600704
+gguf_ex_read_0: tensor[181]: name = blk.13.post_attention_norm.weight, size = 10240, offset = 2327668224
+gguf_ex_read_0: tensor[182]: name = blk.13.ssm_a, size = 128, offset = 2327678464
+gguf_ex_read_0: tensor[183]: name = blk.13.ssm_alpha.weight, size = 87040, offset = 2327678592
+gguf_ex_read_0: tensor[184]: name = blk.13.ssm_beta.weight, size = 87040, offset = 2327765632
+gguf_ex_read_0: tensor[185]: name = blk.13.ssm_conv1d.weight, size = 131072, offset = 2327852672
+gguf_ex_read_0: tensor[186]: name = blk.13.ssm_dt.bias, size = 128, offset = 2327983744
+gguf_ex_read_0: tensor[187]: name = blk.13.ssm_norm.weight, size = 512, offset = 2327983872
+gguf_ex_read_0: tensor[188]: name = blk.13.ssm_out.weight, size = 11141120, offset = 2327984384
+gguf_ex_read_0: tensor[189]: name = blk.14.attn_gate.weight, size = 11141120, offset = 2339125504
+gguf_ex_read_0: tensor[190]: name = blk.14.attn_norm.weight, size = 10240, offset = 2350266624
+gguf_ex_read_0: tensor[191]: name = blk.14.attn_qkv.weight, size = 22282240, offset = 2350276864
+gguf_ex_read_0: tensor[192]: name = blk.14.ffn_down.weight, size = 25067520, offset = 2372559104
+gguf_ex_read_0: tensor[193]: name = blk.14.ffn_gate.weight, size = 25067520, offset = 2397626624
+gguf_ex_read_0: tensor[194]: name = blk.14.ffn_up.weight, size = 25067520, offset = 2422694144
+gguf_ex_read_0: tensor[195]: name = blk.14.post_attention_norm.weight, size = 10240, offset = 2447761664
+gguf_ex_read_0: tensor[196]: name = blk.14.ssm_a, size = 128, offset = 2447771904
+gguf_ex_read_0: tensor[197]: name = blk.14.ssm_alpha.weight, size = 87040, offset = 2447772032
+gguf_ex_read_0: tensor[198]: name = blk.14.ssm_beta.weight, size = 87040, offset = 2447859072
+gguf_ex_read_0: tensor[199]: name = blk.14.ssm_conv1d.weight, size = 131072, offset = 2447946112
+gguf_ex_read_0: tensor[200]: name = blk.14.ssm_dt.bias, size = 128, offset = 2448077184
+gguf_ex_read_0: tensor[201]: name = blk.14.ssm_norm.weight, size = 512, offset = 2448077312
+gguf_ex_read_0: tensor[202]: name = blk.14.ssm_out.weight, size = 11141120, offset = 2448077824
+gguf_ex_read_0: tensor[203]: name = blk.15.attn_k.weight, size = 2785280, offset = 2459218944
+gguf_ex_read_0: tensor[204]: name = blk.15.attn_k_norm.weight, size = 1024, offset = 2462004224
+gguf_ex_read_0: tensor[205]: name = blk.15.attn_norm.weight, size = 10240, offset = 2462005248
+gguf_ex_read_0: tensor[206]: name = blk.15.attn_output.weight, size = 11141120, offset = 2462015488
+gguf_ex_read_0: tensor[207]: name = blk.15.attn_q.weight, size = 22282240, offset = 2473156608
+gguf_ex_read_0: tensor[208]: name = blk.15.attn_q_norm.weight, size = 1024, offset = 2495438848
+gguf_ex_read_0: tensor[209]: name = blk.15.attn_v.weight, size = 2785280, offset = 2495439872
+gguf_ex_read_0: tensor[210]: name = blk.15.ffn_down.weight, size = 25067520, offset = 2498225152
+gguf_ex_read_0: tensor[211]: name = blk.15.ffn_gate.weight, size = 25067520, offset = 2523292672
+gguf_ex_read_0: tensor[212]: name = blk.15.ffn_up.weight, size = 25067520, offset = 2548360192
+gguf_ex_read_0: tensor[213]: name = blk.15.post_attention_norm.weight, size = 10240, offset = 2573427712
+gguf_ex_read_0: tensor[214]: name = blk.16.attn_gate.weight, size = 11141120, offset = 2573437952
+gguf_ex_read_0: tensor[215]: name = blk.16.attn_norm.weight, size = 10240, offset = 2584579072
+gguf_ex_read_0: tensor[216]: name = blk.16.attn_qkv.weight, size = 22282240, offset = 2584589312
+gguf_ex_read_0: tensor[217]: name = blk.16.ffn_down.weight, size = 25067520, offset = 2606871552
+gguf_ex_read_0: tensor[218]: name = blk.16.ffn_gate.weight, size = 25067520, offset = 2631939072
+gguf_ex_read_0: tensor[219]: name = blk.16.ffn_up.weight, size = 25067520, offset = 2657006592
+gguf_ex_read_0: tensor[220]: name = blk.16.post_attention_norm.weight, size = 10240, offset = 2682074112
+gguf_ex_read_0: tensor[221]: name = blk.16.ssm_a, size = 128, offset = 2682084352
+gguf_ex_read_0: tensor[222]: name = blk.16.ssm_alpha.weight, size = 87040, offset = 2682084480
+gguf_ex_read_0: tensor[223]: name = blk.16.ssm_beta.weight, size = 87040, offset = 2682171520
+gguf_ex_read_0: tensor[224]: name = blk.16.ssm_conv1d.weight, size = 131072, offset = 2682258560
+gguf_ex_read_0: tensor[225]: name = blk.16.ssm_dt.bias, size = 128, offset = 2682389632
+gguf_ex_read_0: tensor[226]: name = blk.16.ssm_norm.weight, size = 512, offset = 2682389760
+gguf_ex_read_0: tensor[227]: name = blk.16.ssm_out.weight, size = 11141120, offset = 2682390272
+gguf_ex_read_0: tensor[228]: name = blk.17.attn_gate.weight, size = 11141120, offset = 2693531392
+gguf_ex_read_0: tensor[229]: name = blk.17.attn_norm.weight, size = 10240, offset = 2704672512
+gguf_ex_read_0: tensor[230]: name = blk.17.attn_qkv.weight, size = 22282240, offset = 2704682752
+gguf_ex_read_0: tensor[231]: name = blk.17.ffn_down.weight, size = 25067520, offset = 2726964992
+gguf_ex_read_0: tensor[232]: name = blk.17.ffn_gate.weight, size = 25067520, offset = 2752032512
+gguf_ex_read_0: tensor[233]: name = blk.17.ffn_up.weight, size = 25067520, offset = 2777100032
+gguf_ex_read_0: tensor[234]: name = blk.17.post_attention_norm.weight, size = 10240, offset = 2802167552
+gguf_ex_read_0: tensor[235]: name = blk.17.ssm_a, size = 128, offset = 2802177792
+gguf_ex_read_0: tensor[236]: name = blk.17.ssm_alpha.weight, size = 87040, offset = 2802177920
+gguf_ex_read_0: tensor[237]: name = blk.17.ssm_beta.weight, size = 87040, offset = 2802264960
+gguf_ex_read_0: tensor[238]: name = blk.17.ssm_conv1d.weight, size = 131072, offset = 2802352000
+gguf_ex_read_0: tensor[239]: name = blk.17.ssm_dt.bias, size = 128, offset = 2802483072
+gguf_ex_read_0: tensor[240]: name = blk.17.ssm_norm.weight, size = 512, offset = 2802483200
+gguf_ex_read_0: tensor[241]: name = blk.17.ssm_out.weight, size = 11141120, offset = 2802483712
+gguf_ex_read_0: tensor[242]: name = blk.18.attn_gate.weight, size = 11141120, offset = 2813624832
+gguf_ex_read_0: tensor[243]: name = blk.18.attn_norm.weight, size = 10240, offset = 2824765952
+gguf_ex_read_0: tensor[244]: name = blk.18.attn_qkv.weight, size = 22282240, offset = 2824776192
+gguf_ex_read_0: tensor[245]: name = blk.18.ffn_down.weight, size = 25067520, offset = 2847058432
+gguf_ex_read_0: tensor[246]: name = blk.18.ffn_gate.weight, size = 25067520, offset = 2872125952
+gguf_ex_read_0: tensor[247]: name = blk.18.ffn_up.weight, size = 25067520, offset = 2897193472
+gguf_ex_read_0: tensor[248]: name = blk.18.post_attention_norm.weight, size = 10240, offset = 2922260992
+gguf_ex_read_0: tensor[249]: name = blk.18.ssm_a, size = 128, offset = 2922271232
+gguf_ex_read_0: tensor[250]: name = blk.18.ssm_alpha.weight, size = 87040, offset = 2922271360
+gguf_ex_read_0: tensor[251]: name = blk.18.ssm_beta.weight, size = 87040, offset = 2922358400
+gguf_ex_read_0: tensor[252]: name = blk.18.ssm_conv1d.weight, size = 131072, offset = 2922445440
+gguf_ex_read_0: tensor[253]: name = blk.18.ssm_dt.bias, size = 128, offset = 2922576512
+gguf_ex_read_0: tensor[254]: name = blk.18.ssm_norm.weight, size = 512, offset = 2922576640
+gguf_ex_read_0: tensor[255]: name = blk.18.ssm_out.weight, size = 11141120, offset = 2922577152
+gguf_ex_read_0: tensor[256]: name = blk.19.attn_k.weight, size = 2785280, offset = 2933718272
+gguf_ex_read_0: tensor[257]: name = blk.19.attn_k_norm.weight, size = 1024, offset = 2936503552
+gguf_ex_read_0: tensor[258]: name = blk.19.attn_norm.weight, size = 10240, offset = 2936504576
+gguf_ex_read_0: tensor[259]: name = blk.19.attn_output.weight, size = 11141120, offset = 2936514816
+gguf_ex_read_0: tensor[260]: name = blk.19.attn_q.weight, size = 22282240, offset = 2947655936
+gguf_ex_read_0: tensor[261]: name = blk.19.attn_q_norm.weight, size = 1024, offset = 2969938176
+gguf_ex_read_0: tensor[262]: name = blk.19.attn_v.weight, size = 2785280, offset = 2969939200
+gguf_ex_read_0: tensor[263]: name = blk.19.ffn_down.weight, size = 25067520, offset = 2972724480
+gguf_ex_read_0: tensor[264]: name = blk.19.ffn_gate.weight, size = 25067520, offset = 2997792000
+gguf_ex_read_0: tensor[265]: name = blk.19.ffn_up.weight, size = 25067520, offset = 3022859520
+gguf_ex_read_0: tensor[266]: name = blk.19.post_attention_norm.weight, size = 10240, offset = 3047927040
+gguf_ex_read_0: tensor[267]: name = blk.20.attn_gate.weight, size = 11141120, offset = 3047937280
+gguf_ex_read_0: tensor[268]: name = blk.20.attn_norm.weight, size = 10240, offset = 3059078400
+gguf_ex_read_0: tensor[269]: name = blk.20.attn_qkv.weight, size = 22282240, offset = 3059088640
+gguf_ex_read_0: tensor[270]: name = blk.20.ffn_down.weight, size = 25067520, offset = 3081370880
+gguf_ex_read_0: tensor[271]: name = blk.20.ffn_gate.weight, size = 25067520, offset = 3106438400
+gguf_ex_read_0: tensor[272]: name = blk.20.ffn_up.weight, size = 25067520, offset = 3131505920
+gguf_ex_read_0: tensor[273]: name = blk.20.post_attention_norm.weight, size = 10240, offset = 3156573440
+gguf_ex_read_0: tensor[274]: name = blk.20.ssm_a, size = 128, offset = 3156583680
+gguf_ex_read_0: tensor[275]: name = blk.20.ssm_alpha.weight, size = 87040, offset = 3156583808
+gguf_ex_read_0: tensor[276]: name = blk.20.ssm_beta.weight, size = 87040, offset = 3156670848
+gguf_ex_read_0: tensor[277]: name = blk.20.ssm_conv1d.weight, size = 131072, offset = 3156757888
+gguf_ex_read_0: tensor[278]: name = blk.20.ssm_dt.bias, size = 128, offset = 3156888960
+gguf_ex_read_0: tensor[279]: name = blk.20.ssm_norm.weight, size = 512, offset = 3156889088
+gguf_ex_read_0: tensor[280]: name = blk.20.ssm_out.weight, size = 11141120, offset = 3156889600
+gguf_ex_read_0: tensor[281]: name = blk.21.attn_gate.weight, size = 11141120, offset = 3168030720
+gguf_ex_read_0: tensor[282]: name = blk.21.attn_norm.weight, size = 10240, offset = 3179171840
+gguf_ex_read_0: tensor[283]: name = blk.21.attn_qkv.weight, size = 22282240, offset = 3179182080
+gguf_ex_read_0: tensor[284]: name = blk.21.ffn_down.weight, size = 25067520, offset = 3201464320
+gguf_ex_read_0: tensor[285]: name = blk.21.ffn_gate.weight, size = 25067520, offset = 3226531840
+gguf_ex_read_0: tensor[286]: name = blk.21.ffn_up.weight, size = 25067520, offset = 3251599360
+gguf_ex_read_0: tensor[287]: name = blk.21.post_attention_norm.weight, size = 10240, offset = 3276666880
+gguf_ex_read_0: tensor[288]: name = blk.21.ssm_a, size = 128, offset = 3276677120
+gguf_ex_read_0: tensor[289]: name = blk.21.ssm_alpha.weight, size = 87040, offset = 3276677248
+gguf_ex_read_0: tensor[290]: name = blk.21.ssm_beta.weight, size = 87040, offset = 3276764288
+gguf_ex_read_0: tensor[291]: name = blk.21.ssm_conv1d.weight, size = 131072, offset = 3276851328
+gguf_ex_read_0: tensor[292]: name = blk.21.ssm_dt.bias, size = 128, offset = 3276982400
+gguf_ex_read_0: tensor[293]: name = blk.21.ssm_norm.weight, size = 512, offset = 3276982528
+gguf_ex_read_0: tensor[294]: name = blk.21.ssm_out.weight, size = 11141120, offset = 3276983040
+gguf_ex_read_0: tensor[295]: name = blk.22.attn_gate.weight, size = 11141120, offset = 3288124160
+gguf_ex_read_0: tensor[296]: name = blk.22.attn_norm.weight, size = 10240, offset = 3299265280
+gguf_ex_read_0: tensor[297]: name = blk.22.attn_qkv.weight, size = 22282240, offset = 3299275520
+gguf_ex_read_0: tensor[298]: name = blk.22.ffn_down.weight, size = 25067520, offset = 3321557760
+gguf_ex_read_0: tensor[299]: name = blk.22.ffn_gate.weight, size = 25067520, offset = 3346625280
+gguf_ex_read_0: tensor[300]: name = blk.22.ffn_up.weight, size = 25067520, offset = 3371692800
+gguf_ex_read_0: tensor[301]: name = blk.22.post_attention_norm.weight, size = 10240, offset = 3396760320
+gguf_ex_read_0: tensor[302]: name = blk.22.ssm_a, size = 128, offset = 3396770560
+gguf_ex_read_0: tensor[303]: name = blk.22.ssm_alpha.weight, size = 87040, offset = 3396770688
+gguf_ex_read_0: tensor[304]: name = blk.22.ssm_beta.weight, size = 87040, offset = 3396857728
+gguf_ex_read_0: tensor[305]: name = blk.22.ssm_conv1d.weight, size = 131072, offset = 3396944768
+gguf_ex_read_0: tensor[306]: name = blk.22.ssm_dt.bias, size = 128, offset = 3397075840
+gguf_ex_read_0: tensor[307]: name = blk.22.ssm_norm.weight, size = 512, offset = 3397075968
+gguf_ex_read_0: tensor[308]: name = blk.22.ssm_out.weight, size = 11141120, offset = 3397076480
+gguf_ex_read_0: tensor[309]: name = blk.23.attn_k.weight, size = 2785280, offset = 3408217600
+gguf_ex_read_0: tensor[310]: name = blk.23.attn_k_norm.weight, size = 1024, offset = 3411002880
+gguf_ex_read_0: tensor[311]: name = blk.23.attn_norm.weight, size = 10240, offset = 3411003904
+gguf_ex_read_0: tensor[312]: name = blk.23.attn_output.weight, size = 11141120, offset = 3411014144
+gguf_ex_read_0: tensor[313]: name = blk.23.attn_q.weight, size = 22282240, offset = 3422155264
+gguf_ex_read_0: tensor[314]: name = blk.23.attn_q_norm.weight, size = 1024, offset = 3444437504
+gguf_ex_read_0: tensor[315]: name = blk.23.attn_v.weight, size = 2785280, offset = 3444438528
+gguf_ex_read_0: tensor[316]: name = blk.23.ffn_down.weight, size = 25067520, offset = 3447223808
+gguf_ex_read_0: tensor[317]: name = blk.23.ffn_gate.weight, size = 25067520, offset = 3472291328
+gguf_ex_read_0: tensor[318]: name = blk.23.ffn_up.weight, size = 25067520, offset = 3497358848
+gguf_ex_read_0: tensor[319]: name = blk.23.post_attention_norm.weight, size = 10240, offset = 3522426368
+gguf_ex_read_0: tensor[320]: name = blk.24.attn_gate.weight, size = 11141120, offset = 3522436608
+gguf_ex_read_0: tensor[321]: name = blk.24.attn_norm.weight, size = 10240, offset = 3533577728
+gguf_ex_read_0: tensor[322]: name = blk.24.attn_qkv.weight, size = 22282240, offset = 3533587968
+gguf_ex_read_0: tensor[323]: name = blk.24.ffn_down.weight, size = 25067520, offset = 3555870208
+gguf_ex_read_0: tensor[324]: name = blk.24.ffn_gate.weight, size = 25067520, offset = 3580937728
+gguf_ex_read_0: tensor[325]: name = blk.24.ffn_up.weight, size = 25067520, offset = 3606005248
+gguf_ex_read_0: tensor[326]: name = blk.24.post_attention_norm.weight, size = 10240, offset = 3631072768
+gguf_ex_read_0: tensor[327]: name = blk.24.ssm_a, size = 128, offset = 3631083008
+gguf_ex_read_0: tensor[328]: name = blk.24.ssm_alpha.weight, size = 87040, offset = 3631083136
+gguf_ex_read_0: tensor[329]: name = blk.24.ssm_beta.weight, size = 87040, offset = 3631170176
+gguf_ex_read_0: tensor[330]: name = blk.24.ssm_conv1d.weight, size = 131072, offset = 3631257216
+gguf_ex_read_0: tensor[331]: name = blk.24.ssm_dt.bias, size = 128, offset = 3631388288
+gguf_ex_read_0: tensor[332]: name = blk.24.ssm_norm.weight, size = 512, offset = 3631388416
+gguf_ex_read_0: tensor[333]: name = blk.24.ssm_out.weight, size = 11141120, offset = 3631388928
+gguf_ex_read_0: tensor[334]: name = blk.25.attn_gate.weight, size = 11141120, offset = 3642530048
+gguf_ex_read_0: tensor[335]: name = blk.25.attn_norm.weight, size = 10240, offset = 3653671168
+gguf_ex_read_0: tensor[336]: name = blk.25.attn_qkv.weight, size = 22282240, offset = 3653681408
+gguf_ex_read_0: tensor[337]: name = blk.25.ffn_down.weight, size = 25067520, offset = 3675963648
+gguf_ex_read_0: tensor[338]: name = blk.25.ffn_gate.weight, size = 25067520, offset = 3701031168
+gguf_ex_read_0: tensor[339]: name = blk.25.ffn_up.weight, size = 25067520, offset = 3726098688
+gguf_ex_read_0: tensor[340]: name = blk.25.post_attention_norm.weight, size = 10240, offset = 3751166208
+gguf_ex_read_0: tensor[341]: name = blk.25.ssm_a, size = 128, offset = 3751176448
+gguf_ex_read_0: tensor[342]: name = blk.25.ssm_alpha.weight, size = 87040, offset = 3751176576
+gguf_ex_read_0: tensor[343]: name = blk.25.ssm_beta.weight, size = 87040, offset = 3751263616
+gguf_ex_read_0: tensor[344]: name = blk.25.ssm_conv1d.weight, size = 131072, offset = 3751350656
+gguf_ex_read_0: tensor[345]: name = blk.25.ssm_dt.bias, size = 128, offset = 3751481728
+gguf_ex_read_0: tensor[346]: name = blk.25.ssm_norm.weight, size = 512, offset = 3751481856
+gguf_ex_read_0: tensor[347]: name = blk.25.ssm_out.weight, size = 11141120, offset = 3751482368
+gguf_ex_read_0: tensor[348]: name = blk.26.attn_gate.weight, size = 11141120, offset = 3762623488
+gguf_ex_read_0: tensor[349]: name = blk.26.attn_norm.weight, size = 10240, offset = 3773764608
+gguf_ex_read_0: tensor[350]: name = blk.26.attn_qkv.weight, size = 22282240, offset = 3773774848
+gguf_ex_read_0: tensor[351]: name = blk.26.ffn_down.weight, size = 25067520, offset = 3796057088
+gguf_ex_read_0: tensor[352]: name = blk.26.ffn_gate.weight, size = 25067520, offset = 3821124608
+gguf_ex_read_0: tensor[353]: name = blk.26.ffn_up.weight, size = 25067520, offset = 3846192128
+gguf_ex_read_0: tensor[354]: name = blk.26.post_attention_norm.weight, size = 10240, offset = 3871259648
+gguf_ex_read_0: tensor[355]: name = blk.26.ssm_a, size = 128, offset = 3871269888
+gguf_ex_read_0: tensor[356]: name = blk.26.ssm_alpha.weight, size = 87040, offset = 3871270016
+gguf_ex_read_0: tensor[357]: name = blk.26.ssm_beta.weight, size = 87040, offset = 3871357056
+gguf_ex_read_0: tensor[358]: name = blk.26.ssm_conv1d.weight, size = 131072, offset = 3871444096
+gguf_ex_read_0: tensor[359]: name = blk.26.ssm_dt.bias, size = 128, offset = 3871575168
+gguf_ex_read_0: tensor[360]: name = blk.26.ssm_norm.weight, size = 512, offset = 3871575296
+gguf_ex_read_0: tensor[361]: name = blk.26.ssm_out.weight, size = 11141120, offset = 3871575808
+gguf_ex_read_0: tensor[362]: name = blk.27.attn_k.weight, size = 2785280, offset = 3882716928
+gguf_ex_read_0: tensor[363]: name = blk.27.attn_k_norm.weight, size = 1024, offset = 3885502208
+gguf_ex_read_0: tensor[364]: name = blk.27.attn_norm.weight, size = 10240, offset = 3885503232
+gguf_ex_read_0: tensor[365]: name = blk.27.attn_output.weight, size = 11141120, offset = 3885513472
+gguf_ex_read_0: tensor[366]: name = blk.27.attn_q.weight, size = 22282240, offset = 3896654592
+gguf_ex_read_0: tensor[367]: name = blk.27.attn_q_norm.weight, size = 1024, offset = 3918936832
+gguf_ex_read_0: tensor[368]: name = blk.27.attn_v.weight, size = 2785280, offset = 3918937856
+gguf_ex_read_0: tensor[369]: name = blk.27.ffn_down.weight, size = 25067520, offset = 3921723136
+gguf_ex_read_0: tensor[370]: name = blk.27.ffn_gate.weight, size = 25067520, offset = 3946790656
+gguf_ex_read_0: tensor[371]: name = blk.27.ffn_up.weight, size = 25067520, offset = 3971858176
+gguf_ex_read_0: tensor[372]: name = blk.27.post_attention_norm.weight, size = 10240, offset = 3996925696
+gguf_ex_read_0: tensor[373]: name = blk.28.attn_gate.weight, size = 11141120, offset = 3996935936
+gguf_ex_read_0: tensor[374]: name = blk.28.attn_norm.weight, size = 10240, offset = 4008077056
+gguf_ex_read_0: tensor[375]: name = blk.28.attn_qkv.weight, size = 22282240, offset = 4008087296
+gguf_ex_read_0: tensor[376]: name = blk.28.ffn_down.weight, size = 25067520, offset = 4030369536
+gguf_ex_read_0: tensor[377]: name = blk.28.ffn_gate.weight, size = 25067520, offset = 4055437056
+gguf_ex_read_0: tensor[378]: name = blk.28.ffn_up.weight, size = 25067520, offset = 4080504576
+gguf_ex_read_0: tensor[379]: name = blk.28.post_attention_norm.weight, size = 10240, offset = 4105572096
+gguf_ex_read_0: tensor[380]: name = blk.28.ssm_a, size = 128, offset = 4105582336
+gguf_ex_read_0: tensor[381]: name = blk.28.ssm_alpha.weight, size = 87040, offset = 4105582464
+gguf_ex_read_0: tensor[382]: name = blk.28.ssm_beta.weight, size = 87040, offset = 4105669504
+gguf_ex_read_0: tensor[383]: name = blk.28.ssm_conv1d.weight, size = 131072, offset = 4105756544
+gguf_ex_read_0: tensor[384]: name = blk.28.ssm_dt.bias, size = 128, offset = 4105887616
+gguf_ex_read_0: tensor[385]: name = blk.28.ssm_norm.weight, size = 512, offset = 4105887744
+gguf_ex_read_0: tensor[386]: name = blk.28.ssm_out.weight, size = 11141120, offset = 4105888256
+gguf_ex_read_0: tensor[387]: name = blk.29.attn_gate.weight, size = 11141120, offset = 4117029376
+gguf_ex_read_0: tensor[388]: name = blk.29.attn_norm.weight, size = 10240, offset = 4128170496
+gguf_ex_read_0: tensor[389]: name = blk.29.attn_qkv.weight, size = 22282240, offset = 4128180736
+gguf_ex_read_0: tensor[390]: name = blk.29.ffn_down.weight, size = 25067520, offset = 4150462976
+gguf_ex_read_0: tensor[391]: name = blk.29.ffn_gate.weight, size = 25067520, offset = 4175530496
+gguf_ex_read_0: tensor[392]: name = blk.29.ffn_up.weight, size = 25067520, offset = 4200598016
+gguf_ex_read_0: tensor[393]: name = blk.29.post_attention_norm.weight, size = 10240, offset = 4225665536
+gguf_ex_read_0: tensor[394]: name = blk.29.ssm_a, size = 128, offset = 4225675776
+gguf_ex_read_0: tensor[395]: name = blk.29.ssm_alpha.weight, size = 87040, offset = 4225675904
+gguf_ex_read_0: tensor[396]: name = blk.29.ssm_beta.weight, size = 87040, offset = 4225762944
+gguf_ex_read_0: tensor[397]: name = blk.29.ssm_conv1d.weight, size = 131072, offset = 4225849984
+gguf_ex_read_0: tensor[398]: name = blk.29.ssm_dt.bias, size = 128, offset = 4225981056
+gguf_ex_read_0: tensor[399]: name = blk.29.ssm_norm.weight, size = 512, offset = 4225981184
+gguf_ex_read_0: tensor[400]: name = blk.29.ssm_out.weight, size = 11141120, offset = 4225981696
+gguf_ex_read_0: tensor[401]: name = blk.30.attn_gate.weight, size = 11141120, offset = 4237122816
+gguf_ex_read_0: tensor[402]: name = blk.30.attn_norm.weight, size = 10240, offset = 4248263936
+gguf_ex_read_0: tensor[403]: name = blk.30.attn_qkv.weight, size = 22282240, offset = 4248274176
+gguf_ex_read_0: tensor[404]: name = blk.30.ffn_down.weight, size = 25067520, offset = 4270556416
+gguf_ex_read_0: tensor[405]: name = blk.30.ffn_gate.weight, size = 25067520, offset = 4295623936
+gguf_ex_read_0: tensor[406]: name = blk.30.ffn_up.weight, size = 25067520, offset = 4320691456
+gguf_ex_read_0: tensor[407]: name = blk.30.post_attention_norm.weight, size = 10240, offset = 4345758976
+gguf_ex_read_0: tensor[408]: name = blk.30.ssm_a, size = 128, offset = 4345769216
+gguf_ex_read_0: tensor[409]: name = blk.30.ssm_alpha.weight, size = 87040, offset = 4345769344
+gguf_ex_read_0: tensor[410]: name = blk.30.ssm_beta.weight, size = 87040, offset = 4345856384
+gguf_ex_read_0: tensor[411]: name = blk.30.ssm_conv1d.weight, size = 131072, offset = 4345943424
+gguf_ex_read_0: tensor[412]: name = blk.30.ssm_dt.bias, size = 128, offset = 4346074496
+gguf_ex_read_0: tensor[413]: name = blk.30.ssm_norm.weight, size = 512, offset = 4346074624
+gguf_ex_read_0: tensor[414]: name = blk.30.ssm_out.weight, size = 11141120, offset = 4346075136
+gguf_ex_read_0: tensor[415]: name = blk.31.attn_k.weight, size = 2785280, offset = 4357216256
+gguf_ex_read_0: tensor[416]: name = blk.31.attn_k_norm.weight, size = 1024, offset = 4360001536
+gguf_ex_read_0: tensor[417]: name = blk.31.attn_norm.weight, size = 10240, offset = 4360002560
+gguf_ex_read_0: tensor[418]: name = blk.31.attn_output.weight, size = 11141120, offset = 4360012800
+gguf_ex_read_0: tensor[419]: name = blk.31.attn_q.weight, size = 22282240, offset = 4371153920
+gguf_ex_read_0: tensor[420]: name = blk.31.attn_q_norm.weight, size = 1024, offset = 4393436160
+gguf_ex_read_0: tensor[421]: name = blk.31.attn_v.weight, size = 2785280, offset = 4393437184
+gguf_ex_read_0: tensor[422]: name = blk.31.ffn_down.weight, size = 25067520, offset = 4396222464
+gguf_ex_read_0: tensor[423]: name = blk.31.ffn_gate.weight, size = 25067520, offset = 4421289984
+gguf_ex_read_0: tensor[424]: name = blk.31.ffn_up.weight, size = 25067520, offset = 4446357504
+gguf_ex_read_0: tensor[425]: name = blk.31.post_attention_norm.weight, size = 10240, offset = 4471425024
+gguf_ex_read_1: version:      3
+gguf_ex_read_1: alignment:   32
+gguf_ex_read_1: data offset: 10968224
+gguf_ex_read_1: n_kv: 46
+gguf_ex_read_1: kv[0]: key = general.architecture
+gguf_ex_read_1: kv[1]: key = general.type
+gguf_ex_read_1: kv[2]: key = general.name
+gguf_ex_read_1: kv[3]: key = general.basename
+gguf_ex_read_1: kv[4]: key = general.quantized_by
+gguf_ex_read_1: kv[5]: key = general.size_label
+gguf_ex_read_1: kv[6]: key = general.license
+gguf_ex_read_1: kv[7]: key = general.license.link
+gguf_ex_read_1: kv[8]: key = general.repo_url
+gguf_ex_read_1: kv[9]: key = general.base_model.count
+gguf_ex_read_1: kv[10]: key = general.base_model.0.name
+gguf_ex_read_1: kv[11]: key = general.base_model.0.organization
+gguf_ex_read_1: kv[12]: key = general.base_model.0.repo_url
+gguf_ex_read_1: kv[13]: key = general.tags
+gguf_ex_read_1: kv[14]: key = qwen35.block_count
+gguf_ex_read_1: kv[15]: key = qwen35.context_length
+gguf_ex_read_1: kv[16]: key = qwen35.embedding_length
+gguf_ex_read_1: kv[17]: key = qwen35.feed_forward_length
+gguf_ex_read_1: kv[18]: key = qwen35.attention.head_count
+gguf_ex_read_1: kv[19]: key = qwen35.attention.head_count_kv
+gguf_ex_read_1: kv[20]: key = qwen35.rope.dimension_sections
+gguf_ex_read_1: kv[21]: key = qwen35.rope.freq_base
+gguf_ex_read_1: kv[22]: key = qwen35.attention.layer_norm_rms_epsilon
+gguf_ex_read_1: kv[23]: key = qwen35.attention.key_length
+gguf_ex_read_1: kv[24]: key = qwen35.attention.value_length
+gguf_ex_read_1: kv[25]: key = qwen35.ssm.conv_kernel
+gguf_ex_read_1: kv[26]: key = qwen35.ssm.state_size
+gguf_ex_read_1: kv[27]: key = qwen35.ssm.group_count
+gguf_ex_read_1: kv[28]: key = qwen35.ssm.time_step_rank
+gguf_ex_read_1: kv[29]: key = qwen35.ssm.inner_size
+gguf_ex_read_1: kv[30]: key = qwen35.full_attention_interval
+gguf_ex_read_1: kv[31]: key = qwen35.rope.dimension_count
+gguf_ex_read_1: kv[32]: key = tokenizer.ggml.model
+gguf_ex_read_1: kv[33]: key = tokenizer.ggml.pre
+gguf_ex_read_1: kv[34]: key = tokenizer.ggml.tokens
+gguf_ex_read_1: kv[35]: key = tokenizer.ggml.token_type
+gguf_ex_read_1: kv[36]: key = tokenizer.ggml.merges
+gguf_ex_read_1: kv[37]: key = tokenizer.ggml.eos_token_id
+gguf_ex_read_1: kv[38]: key = tokenizer.ggml.padding_token_id
+gguf_ex_read_1: kv[39]: key = tokenizer.chat_template
+gguf_ex_read_1: kv[40]: key = general.quantization_version
+gguf_ex_read_1: kv[41]: key = general.file_type
+gguf_ex_read_1: kv[42]: key = quantize.imatrix.file
+gguf_ex_read_1: kv[43]: key = quantize.imatrix.dataset
+gguf_ex_read_1: kv[44]: key = quantize.imatrix.entries_count
+gguf_ex_read_1: kv[45]: key = quantize.imatrix.chunks_count
+gguf_ex_read_1: n_tensors: 426
+gguf_ex_read_1: tensor[0]: name = output_norm.weight, size = 10240, offset = 0, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[1]: name = token_embd.weight, size = 675430400, offset = 10240, type = q8_0, n_elts = 19865600
+gguf_ex_read_1: tensor[2]: name = blk.0.attn_gate.weight, size = 11141120, offset = 675440640, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[3]: name = blk.0.attn_norm.weight, size = 10240, offset = 686581760, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[4]: name = blk.0.attn_qkv.weight, size = 22282240, offset = 686592000, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[5]: name = blk.0.ffn_down.weight, size = 25067520, offset = 708874240, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[6]: name = blk.0.ffn_gate.weight, size = 25067520, offset = 733941760, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[7]: name = blk.0.ffn_up.weight, size = 25067520, offset = 759009280, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[8]: name = blk.0.post_attention_norm.weight, size = 10240, offset = 784076800, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[9]: name = blk.0.ssm_a, size = 128, offset = 784087040, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[10]: name = blk.0.ssm_alpha.weight, size = 87040, offset = 784087168, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[11]: name = blk.0.ssm_beta.weight, size = 87040, offset = 784174208, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[12]: name = blk.0.ssm_conv1d.weight, size = 131072, offset = 784261248, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[13]: name = blk.0.ssm_dt.bias, size = 128, offset = 784392320, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[14]: name = blk.0.ssm_norm.weight, size = 512, offset = 784392448, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[15]: name = blk.0.ssm_out.weight, size = 11141120, offset = 784392960, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[16]: name = blk.1.attn_gate.weight, size = 11141120, offset = 795534080, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[17]: name = blk.1.attn_norm.weight, size = 10240, offset = 806675200, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[18]: name = blk.1.attn_qkv.weight, size = 22282240, offset = 806685440, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[19]: name = blk.1.ffn_down.weight, size = 25067520, offset = 828967680, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[20]: name = blk.1.ffn_gate.weight, size = 25067520, offset = 854035200, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[21]: name = blk.1.ffn_up.weight, size = 25067520, offset = 879102720, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[22]: name = blk.1.post_attention_norm.weight, size = 10240, offset = 904170240, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[23]: name = blk.1.ssm_a, size = 128, offset = 904180480, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[24]: name = blk.1.ssm_alpha.weight, size = 87040, offset = 904180608, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[25]: name = blk.1.ssm_beta.weight, size = 87040, offset = 904267648, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[26]: name = blk.1.ssm_conv1d.weight, size = 131072, offset = 904354688, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[27]: name = blk.1.ssm_dt.bias, size = 128, offset = 904485760, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[28]: name = blk.1.ssm_norm.weight, size = 512, offset = 904485888, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[29]: name = blk.1.ssm_out.weight, size = 11141120, offset = 904486400, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[30]: name = blk.2.attn_gate.weight, size = 11141120, offset = 915627520, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[31]: name = blk.2.attn_norm.weight, size = 10240, offset = 926768640, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[32]: name = blk.2.attn_qkv.weight, size = 22282240, offset = 926778880, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[33]: name = blk.2.ffn_down.weight, size = 25067520, offset = 949061120, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[34]: name = blk.2.ffn_gate.weight, size = 25067520, offset = 974128640, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[35]: name = blk.2.ffn_up.weight, size = 25067520, offset = 999196160, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[36]: name = blk.2.post_attention_norm.weight, size = 10240, offset = 1024263680, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[37]: name = blk.2.ssm_a, size = 128, offset = 1024273920, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[38]: name = blk.2.ssm_alpha.weight, size = 87040, offset = 1024274048, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[39]: name = blk.2.ssm_beta.weight, size = 87040, offset = 1024361088, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[40]: name = blk.2.ssm_conv1d.weight, size = 131072, offset = 1024448128, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[41]: name = blk.2.ssm_dt.bias, size = 128, offset = 1024579200, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[42]: name = blk.2.ssm_norm.weight, size = 512, offset = 1024579328, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[43]: name = blk.2.ssm_out.weight, size = 11141120, offset = 1024579840, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[44]: name = blk.3.attn_k.weight, size = 2785280, offset = 1035720960, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[45]: name = blk.3.attn_k_norm.weight, size = 1024, offset = 1038506240, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[46]: name = blk.3.attn_norm.weight, size = 10240, offset = 1038507264, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[47]: name = blk.3.attn_output.weight, size = 11141120, offset = 1038517504, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[48]: name = blk.3.attn_q.weight, size = 22282240, offset = 1049658624, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[49]: name = blk.3.attn_q_norm.weight, size = 1024, offset = 1071940864, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[50]: name = blk.3.attn_v.weight, size = 2785280, offset = 1071941888, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[51]: name = blk.3.ffn_down.weight, size = 25067520, offset = 1074727168, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[52]: name = blk.3.ffn_gate.weight, size = 25067520, offset = 1099794688, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[53]: name = blk.3.ffn_up.weight, size = 25067520, offset = 1124862208, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[54]: name = blk.3.post_attention_norm.weight, size = 10240, offset = 1149929728, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[55]: name = blk.4.attn_gate.weight, size = 11141120, offset = 1149939968, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[56]: name = blk.4.attn_norm.weight, size = 10240, offset = 1161081088, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[57]: name = blk.4.attn_qkv.weight, size = 22282240, offset = 1161091328, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[58]: name = blk.4.ffn_down.weight, size = 25067520, offset = 1183373568, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[59]: name = blk.4.ffn_gate.weight, size = 25067520, offset = 1208441088, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[60]: name = blk.4.ffn_up.weight, size = 25067520, offset = 1233508608, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[61]: name = blk.4.post_attention_norm.weight, size = 10240, offset = 1258576128, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[62]: name = blk.4.ssm_a, size = 128, offset = 1258586368, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[63]: name = blk.4.ssm_alpha.weight, size = 87040, offset = 1258586496, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[64]: name = blk.4.ssm_beta.weight, size = 87040, offset = 1258673536, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[65]: name = blk.4.ssm_conv1d.weight, size = 131072, offset = 1258760576, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[66]: name = blk.4.ssm_dt.bias, size = 128, offset = 1258891648, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[67]: name = blk.4.ssm_norm.weight, size = 512, offset = 1258891776, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[68]: name = blk.4.ssm_out.weight, size = 11141120, offset = 1258892288, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[69]: name = blk.5.attn_gate.weight, size = 11141120, offset = 1270033408, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[70]: name = blk.5.attn_norm.weight, size = 10240, offset = 1281174528, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[71]: name = blk.5.attn_qkv.weight, size = 22282240, offset = 1281184768, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[72]: name = blk.5.ffn_down.weight, size = 25067520, offset = 1303467008, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[73]: name = blk.5.ffn_gate.weight, size = 25067520, offset = 1328534528, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[74]: name = blk.5.ffn_up.weight, size = 25067520, offset = 1353602048, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[75]: name = blk.5.post_attention_norm.weight, size = 10240, offset = 1378669568, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[76]: name = blk.5.ssm_a, size = 128, offset = 1378679808, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[77]: name = blk.5.ssm_alpha.weight, size = 87040, offset = 1378679936, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[78]: name = blk.5.ssm_beta.weight, size = 87040, offset = 1378766976, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[79]: name = blk.5.ssm_conv1d.weight, size = 131072, offset = 1378854016, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[80]: name = blk.5.ssm_dt.bias, size = 128, offset = 1378985088, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[81]: name = blk.5.ssm_norm.weight, size = 512, offset = 1378985216, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[82]: name = blk.5.ssm_out.weight, size = 11141120, offset = 1378985728, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[83]: name = blk.6.attn_gate.weight, size = 11141120, offset = 1390126848, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[84]: name = blk.6.attn_norm.weight, size = 10240, offset = 1401267968, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[85]: name = blk.6.attn_qkv.weight, size = 22282240, offset = 1401278208, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[86]: name = blk.6.ffn_down.weight, size = 25067520, offset = 1423560448, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[87]: name = blk.6.ffn_gate.weight, size = 25067520, offset = 1448627968, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[88]: name = blk.6.ffn_up.weight, size = 25067520, offset = 1473695488, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[89]: name = blk.6.post_attention_norm.weight, size = 10240, offset = 1498763008, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[90]: name = blk.6.ssm_a, size = 128, offset = 1498773248, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[91]: name = blk.6.ssm_alpha.weight, size = 87040, offset = 1498773376, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[92]: name = blk.6.ssm_beta.weight, size = 87040, offset = 1498860416, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[93]: name = blk.6.ssm_conv1d.weight, size = 131072, offset = 1498947456, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[94]: name = blk.6.ssm_dt.bias, size = 128, offset = 1499078528, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[95]: name = blk.6.ssm_norm.weight, size = 512, offset = 1499078656, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[96]: name = blk.6.ssm_out.weight, size = 11141120, offset = 1499079168, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[97]: name = blk.7.attn_k.weight, size = 2785280, offset = 1510220288, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[98]: name = blk.7.attn_k_norm.weight, size = 1024, offset = 1513005568, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[99]: name = blk.7.attn_norm.weight, size = 10240, offset = 1513006592, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[100]: name = blk.7.attn_output.weight, size = 11141120, offset = 1513016832, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[101]: name = blk.7.attn_q.weight, size = 22282240, offset = 1524157952, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[102]: name = blk.7.attn_q_norm.weight, size = 1024, offset = 1546440192, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[103]: name = blk.7.attn_v.weight, size = 2785280, offset = 1546441216, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[104]: name = blk.7.ffn_down.weight, size = 25067520, offset = 1549226496, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[105]: name = blk.7.ffn_gate.weight, size = 25067520, offset = 1574294016, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[106]: name = blk.7.ffn_up.weight, size = 25067520, offset = 1599361536, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[107]: name = blk.7.post_attention_norm.weight, size = 10240, offset = 1624429056, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[108]: name = blk.8.attn_gate.weight, size = 11141120, offset = 1624439296, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[109]: name = blk.8.attn_norm.weight, size = 10240, offset = 1635580416, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[110]: name = blk.8.attn_qkv.weight, size = 22282240, offset = 1635590656, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[111]: name = blk.8.ffn_down.weight, size = 25067520, offset = 1657872896, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[112]: name = blk.8.ffn_gate.weight, size = 25067520, offset = 1682940416, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[113]: name = blk.8.ffn_up.weight, size = 25067520, offset = 1708007936, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[114]: name = blk.8.post_attention_norm.weight, size = 10240, offset = 1733075456, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[115]: name = blk.8.ssm_a, size = 128, offset = 1733085696, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[116]: name = blk.8.ssm_alpha.weight, size = 87040, offset = 1733085824, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[117]: name = blk.8.ssm_beta.weight, size = 87040, offset = 1733172864, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[118]: name = blk.8.ssm_conv1d.weight, size = 131072, offset = 1733259904, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[119]: name = blk.8.ssm_dt.bias, size = 128, offset = 1733390976, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[120]: name = blk.8.ssm_norm.weight, size = 512, offset = 1733391104, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[121]: name = blk.8.ssm_out.weight, size = 11141120, offset = 1733391616, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[122]: name = blk.9.attn_gate.weight, size = 11141120, offset = 1744532736, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[123]: name = blk.9.attn_norm.weight, size = 10240, offset = 1755673856, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[124]: name = blk.9.attn_qkv.weight, size = 22282240, offset = 1755684096, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[125]: name = blk.9.ffn_down.weight, size = 25067520, offset = 1777966336, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[126]: name = blk.9.ffn_gate.weight, size = 25067520, offset = 1803033856, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[127]: name = blk.9.ffn_up.weight, size = 25067520, offset = 1828101376, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[128]: name = blk.9.post_attention_norm.weight, size = 10240, offset = 1853168896, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[129]: name = blk.9.ssm_a, size = 128, offset = 1853179136, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[130]: name = blk.9.ssm_alpha.weight, size = 87040, offset = 1853179264, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[131]: name = blk.9.ssm_beta.weight, size = 87040, offset = 1853266304, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[132]: name = blk.9.ssm_conv1d.weight, size = 131072, offset = 1853353344, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[133]: name = blk.9.ssm_dt.bias, size = 128, offset = 1853484416, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[134]: name = blk.9.ssm_norm.weight, size = 512, offset = 1853484544, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[135]: name = blk.9.ssm_out.weight, size = 11141120, offset = 1853485056, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[136]: name = blk.10.attn_gate.weight, size = 11141120, offset = 1864626176, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[137]: name = blk.10.attn_norm.weight, size = 10240, offset = 1875767296, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[138]: name = blk.10.attn_qkv.weight, size = 22282240, offset = 1875777536, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[139]: name = blk.10.ffn_down.weight, size = 25067520, offset = 1898059776, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[140]: name = blk.10.ffn_gate.weight, size = 25067520, offset = 1923127296, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[141]: name = blk.10.ffn_up.weight, size = 25067520, offset = 1948194816, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[142]: name = blk.10.post_attention_norm.weight, size = 10240, offset = 1973262336, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[143]: name = blk.10.ssm_a, size = 128, offset = 1973272576, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[144]: name = blk.10.ssm_alpha.weight, size = 87040, offset = 1973272704, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[145]: name = blk.10.ssm_beta.weight, size = 87040, offset = 1973359744, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[146]: name = blk.10.ssm_conv1d.weight, size = 131072, offset = 1973446784, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[147]: name = blk.10.ssm_dt.bias, size = 128, offset = 1973577856, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[148]: name = blk.10.ssm_norm.weight, size = 512, offset = 1973577984, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[149]: name = blk.10.ssm_out.weight, size = 11141120, offset = 1973578496, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[150]: name = blk.11.attn_k.weight, size = 2785280, offset = 1984719616, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[151]: name = blk.11.attn_k_norm.weight, size = 1024, offset = 1987504896, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[152]: name = blk.11.attn_norm.weight, size = 10240, offset = 1987505920, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[153]: name = blk.11.attn_output.weight, size = 11141120, offset = 1987516160, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[154]: name = blk.11.attn_q.weight, size = 22282240, offset = 1998657280, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[155]: name = blk.11.attn_q_norm.weight, size = 1024, offset = 2020939520, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[156]: name = blk.11.attn_v.weight, size = 2785280, offset = 2020940544, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[157]: name = blk.11.ffn_down.weight, size = 25067520, offset = 2023725824, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[158]: name = blk.11.ffn_gate.weight, size = 25067520, offset = 2048793344, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[159]: name = blk.11.ffn_up.weight, size = 25067520, offset = 2073860864, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[160]: name = blk.11.post_attention_norm.weight, size = 10240, offset = 2098928384, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[161]: name = blk.12.attn_gate.weight, size = 11141120, offset = 2098938624, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[162]: name = blk.12.attn_norm.weight, size = 10240, offset = 2110079744, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[163]: name = blk.12.attn_qkv.weight, size = 22282240, offset = 2110089984, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[164]: name = blk.12.ffn_down.weight, size = 25067520, offset = 2132372224, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[165]: name = blk.12.ffn_gate.weight, size = 25067520, offset = 2157439744, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[166]: name = blk.12.ffn_up.weight, size = 25067520, offset = 2182507264, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[167]: name = blk.12.post_attention_norm.weight, size = 10240, offset = 2207574784, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[168]: name = blk.12.ssm_a, size = 128, offset = 2207585024, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[169]: name = blk.12.ssm_alpha.weight, size = 87040, offset = 2207585152, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[170]: name = blk.12.ssm_beta.weight, size = 87040, offset = 2207672192, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[171]: name = blk.12.ssm_conv1d.weight, size = 131072, offset = 2207759232, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[172]: name = blk.12.ssm_dt.bias, size = 128, offset = 2207890304, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[173]: name = blk.12.ssm_norm.weight, size = 512, offset = 2207890432, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[174]: name = blk.12.ssm_out.weight, size = 11141120, offset = 2207890944, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[175]: name = blk.13.attn_gate.weight, size = 11141120, offset = 2219032064, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[176]: name = blk.13.attn_norm.weight, size = 10240, offset = 2230173184, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[177]: name = blk.13.attn_qkv.weight, size = 22282240, offset = 2230183424, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[178]: name = blk.13.ffn_down.weight, size = 25067520, offset = 2252465664, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[179]: name = blk.13.ffn_gate.weight, size = 25067520, offset = 2277533184, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[180]: name = blk.13.ffn_up.weight, size = 25067520, offset = 2302600704, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[181]: name = blk.13.post_attention_norm.weight, size = 10240, offset = 2327668224, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[182]: name = blk.13.ssm_a, size = 128, offset = 2327678464, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[183]: name = blk.13.ssm_alpha.weight, size = 87040, offset = 2327678592, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[184]: name = blk.13.ssm_beta.weight, size = 87040, offset = 2327765632, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[185]: name = blk.13.ssm_conv1d.weight, size = 131072, offset = 2327852672, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[186]: name = blk.13.ssm_dt.bias, size = 128, offset = 2327983744, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[187]: name = blk.13.ssm_norm.weight, size = 512, offset = 2327983872, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[188]: name = blk.13.ssm_out.weight, size = 11141120, offset = 2327984384, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[189]: name = blk.14.attn_gate.weight, size = 11141120, offset = 2339125504, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[190]: name = blk.14.attn_norm.weight, size = 10240, offset = 2350266624, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[191]: name = blk.14.attn_qkv.weight, size = 22282240, offset = 2350276864, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[192]: name = blk.14.ffn_down.weight, size = 25067520, offset = 2372559104, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[193]: name = blk.14.ffn_gate.weight, size = 25067520, offset = 2397626624, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[194]: name = blk.14.ffn_up.weight, size = 25067520, offset = 2422694144, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[195]: name = blk.14.post_attention_norm.weight, size = 10240, offset = 2447761664, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[196]: name = blk.14.ssm_a, size = 128, offset = 2447771904, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[197]: name = blk.14.ssm_alpha.weight, size = 87040, offset = 2447772032, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[198]: name = blk.14.ssm_beta.weight, size = 87040, offset = 2447859072, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[199]: name = blk.14.ssm_conv1d.weight, size = 131072, offset = 2447946112, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[200]: name = blk.14.ssm_dt.bias, size = 128, offset = 2448077184, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[201]: name = blk.14.ssm_norm.weight, size = 512, offset = 2448077312, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[202]: name = blk.14.ssm_out.weight, size = 11141120, offset = 2448077824, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[203]: name = blk.15.attn_k.weight, size = 2785280, offset = 2459218944, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[204]: name = blk.15.attn_k_norm.weight, size = 1024, offset = 2462004224, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[205]: name = blk.15.attn_norm.weight, size = 10240, offset = 2462005248, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[206]: name = blk.15.attn_output.weight, size = 11141120, offset = 2462015488, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[207]: name = blk.15.attn_q.weight, size = 22282240, offset = 2473156608, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[208]: name = blk.15.attn_q_norm.weight, size = 1024, offset = 2495438848, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[209]: name = blk.15.attn_v.weight, size = 2785280, offset = 2495439872, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[210]: name = blk.15.ffn_down.weight, size = 25067520, offset = 2498225152, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[211]: name = blk.15.ffn_gate.weight, size = 25067520, offset = 2523292672, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[212]: name = blk.15.ffn_up.weight, size = 25067520, offset = 2548360192, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[213]: name = blk.15.post_attention_norm.weight, size = 10240, offset = 2573427712, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[214]: name = blk.16.attn_gate.weight, size = 11141120, offset = 2573437952, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[215]: name = blk.16.attn_norm.weight, size = 10240, offset = 2584579072, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[216]: name = blk.16.attn_qkv.weight, size = 22282240, offset = 2584589312, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[217]: name = blk.16.ffn_down.weight, size = 25067520, offset = 2606871552, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[218]: name = blk.16.ffn_gate.weight, size = 25067520, offset = 2631939072, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[219]: name = blk.16.ffn_up.weight, size = 25067520, offset = 2657006592, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[220]: name = blk.16.post_attention_norm.weight, size = 10240, offset = 2682074112, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[221]: name = blk.16.ssm_a, size = 128, offset = 2682084352, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[222]: name = blk.16.ssm_alpha.weight, size = 87040, offset = 2682084480, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[223]: name = blk.16.ssm_beta.weight, size = 87040, offset = 2682171520, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[224]: name = blk.16.ssm_conv1d.weight, size = 131072, offset = 2682258560, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[225]: name = blk.16.ssm_dt.bias, size = 128, offset = 2682389632, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[226]: name = blk.16.ssm_norm.weight, size = 512, offset = 2682389760, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[227]: name = blk.16.ssm_out.weight, size = 11141120, offset = 2682390272, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[228]: name = blk.17.attn_gate.weight, size = 11141120, offset = 2693531392, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[229]: name = blk.17.attn_norm.weight, size = 10240, offset = 2704672512, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[230]: name = blk.17.attn_qkv.weight, size = 22282240, offset = 2704682752, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[231]: name = blk.17.ffn_down.weight, size = 25067520, offset = 2726964992, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[232]: name = blk.17.ffn_gate.weight, size = 25067520, offset = 2752032512, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[233]: name = blk.17.ffn_up.weight, size = 25067520, offset = 2777100032, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[234]: name = blk.17.post_attention_norm.weight, size = 10240, offset = 2802167552, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[235]: name = blk.17.ssm_a, size = 128, offset = 2802177792, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[236]: name = blk.17.ssm_alpha.weight, size = 87040, offset = 2802177920, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[237]: name = blk.17.ssm_beta.weight, size = 87040, offset = 2802264960, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[238]: name = blk.17.ssm_conv1d.weight, size = 131072, offset = 2802352000, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[239]: name = blk.17.ssm_dt.bias, size = 128, offset = 2802483072, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[240]: name = blk.17.ssm_norm.weight, size = 512, offset = 2802483200, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[241]: name = blk.17.ssm_out.weight, size = 11141120, offset = 2802483712, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[242]: name = blk.18.attn_gate.weight, size = 11141120, offset = 2813624832, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[243]: name = blk.18.attn_norm.weight, size = 10240, offset = 2824765952, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[244]: name = blk.18.attn_qkv.weight, size = 22282240, offset = 2824776192, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[245]: name = blk.18.ffn_down.weight, size = 25067520, offset = 2847058432, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[246]: name = blk.18.ffn_gate.weight, size = 25067520, offset = 2872125952, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[247]: name = blk.18.ffn_up.weight, size = 25067520, offset = 2897193472, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[248]: name = blk.18.post_attention_norm.weight, size = 10240, offset = 2922260992, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[249]: name = blk.18.ssm_a, size = 128, offset = 2922271232, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[250]: name = blk.18.ssm_alpha.weight, size = 87040, offset = 2922271360, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[251]: name = blk.18.ssm_beta.weight, size = 87040, offset = 2922358400, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[252]: name = blk.18.ssm_conv1d.weight, size = 131072, offset = 2922445440, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[253]: name = blk.18.ssm_dt.bias, size = 128, offset = 2922576512, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[254]: name = blk.18.ssm_norm.weight, size = 512, offset = 2922576640, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[255]: name = blk.18.ssm_out.weight, size = 11141120, offset = 2922577152, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[256]: name = blk.19.attn_k.weight, size = 2785280, offset = 2933718272, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[257]: name = blk.19.attn_k_norm.weight, size = 1024, offset = 2936503552, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[258]: name = blk.19.attn_norm.weight, size = 10240, offset = 2936504576, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[259]: name = blk.19.attn_output.weight, size = 11141120, offset = 2936514816, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[260]: name = blk.19.attn_q.weight, size = 22282240, offset = 2947655936, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[261]: name = blk.19.attn_q_norm.weight, size = 1024, offset = 2969938176, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[262]: name = blk.19.attn_v.weight, size = 2785280, offset = 2969939200, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[263]: name = blk.19.ffn_down.weight, size = 25067520, offset = 2972724480, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[264]: name = blk.19.ffn_gate.weight, size = 25067520, offset = 2997792000, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[265]: name = blk.19.ffn_up.weight, size = 25067520, offset = 3022859520, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[266]: name = blk.19.post_attention_norm.weight, size = 10240, offset = 3047927040, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[267]: name = blk.20.attn_gate.weight, size = 11141120, offset = 3047937280, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[268]: name = blk.20.attn_norm.weight, size = 10240, offset = 3059078400, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[269]: name = blk.20.attn_qkv.weight, size = 22282240, offset = 3059088640, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[270]: name = blk.20.ffn_down.weight, size = 25067520, offset = 3081370880, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[271]: name = blk.20.ffn_gate.weight, size = 25067520, offset = 3106438400, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[272]: name = blk.20.ffn_up.weight, size = 25067520, offset = 3131505920, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[273]: name = blk.20.post_attention_norm.weight, size = 10240, offset = 3156573440, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[274]: name = blk.20.ssm_a, size = 128, offset = 3156583680, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[275]: name = blk.20.ssm_alpha.weight, size = 87040, offset = 3156583808, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[276]: name = blk.20.ssm_beta.weight, size = 87040, offset = 3156670848, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[277]: name = blk.20.ssm_conv1d.weight, size = 131072, offset = 3156757888, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[278]: name = blk.20.ssm_dt.bias, size = 128, offset = 3156888960, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[279]: name = blk.20.ssm_norm.weight, size = 512, offset = 3156889088, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[280]: name = blk.20.ssm_out.weight, size = 11141120, offset = 3156889600, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[281]: name = blk.21.attn_gate.weight, size = 11141120, offset = 3168030720, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[282]: name = blk.21.attn_norm.weight, size = 10240, offset = 3179171840, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[283]: name = blk.21.attn_qkv.weight, size = 22282240, offset = 3179182080, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[284]: name = blk.21.ffn_down.weight, size = 25067520, offset = 3201464320, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[285]: name = blk.21.ffn_gate.weight, size = 25067520, offset = 3226531840, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[286]: name = blk.21.ffn_up.weight, size = 25067520, offset = 3251599360, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[287]: name = blk.21.post_attention_norm.weight, size = 10240, offset = 3276666880, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[288]: name = blk.21.ssm_a, size = 128, offset = 3276677120, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[289]: name = blk.21.ssm_alpha.weight, size = 87040, offset = 3276677248, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[290]: name = blk.21.ssm_beta.weight, size = 87040, offset = 3276764288, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[291]: name = blk.21.ssm_conv1d.weight, size = 131072, offset = 3276851328, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[292]: name = blk.21.ssm_dt.bias, size = 128, offset = 3276982400, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[293]: name = blk.21.ssm_norm.weight, size = 512, offset = 3276982528, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[294]: name = blk.21.ssm_out.weight, size = 11141120, offset = 3276983040, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[295]: name = blk.22.attn_gate.weight, size = 11141120, offset = 3288124160, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[296]: name = blk.22.attn_norm.weight, size = 10240, offset = 3299265280, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[297]: name = blk.22.attn_qkv.weight, size = 22282240, offset = 3299275520, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[298]: name = blk.22.ffn_down.weight, size = 25067520, offset = 3321557760, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[299]: name = blk.22.ffn_gate.weight, size = 25067520, offset = 3346625280, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[300]: name = blk.22.ffn_up.weight, size = 25067520, offset = 3371692800, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[301]: name = blk.22.post_attention_norm.weight, size = 10240, offset = 3396760320, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[302]: name = blk.22.ssm_a, size = 128, offset = 3396770560, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[303]: name = blk.22.ssm_alpha.weight, size = 87040, offset = 3396770688, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[304]: name = blk.22.ssm_beta.weight, size = 87040, offset = 3396857728, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[305]: name = blk.22.ssm_conv1d.weight, size = 131072, offset = 3396944768, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[306]: name = blk.22.ssm_dt.bias, size = 128, offset = 3397075840, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[307]: name = blk.22.ssm_norm.weight, size = 512, offset = 3397075968, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[308]: name = blk.22.ssm_out.weight, size = 11141120, offset = 3397076480, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[309]: name = blk.23.attn_k.weight, size = 2785280, offset = 3408217600, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[310]: name = blk.23.attn_k_norm.weight, size = 1024, offset = 3411002880, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[311]: name = blk.23.attn_norm.weight, size = 10240, offset = 3411003904, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[312]: name = blk.23.attn_output.weight, size = 11141120, offset = 3411014144, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[313]: name = blk.23.attn_q.weight, size = 22282240, offset = 3422155264, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[314]: name = blk.23.attn_q_norm.weight, size = 1024, offset = 3444437504, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[315]: name = blk.23.attn_v.weight, size = 2785280, offset = 3444438528, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[316]: name = blk.23.ffn_down.weight, size = 25067520, offset = 3447223808, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[317]: name = blk.23.ffn_gate.weight, size = 25067520, offset = 3472291328, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[318]: name = blk.23.ffn_up.weight, size = 25067520, offset = 3497358848, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[319]: name = blk.23.post_attention_norm.weight, size = 10240, offset = 3522426368, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[320]: name = blk.24.attn_gate.weight, size = 11141120, offset = 3522436608, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[321]: name = blk.24.attn_norm.weight, size = 10240, offset = 3533577728, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[322]: name = blk.24.attn_qkv.weight, size = 22282240, offset = 3533587968, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[323]: name = blk.24.ffn_down.weight, size = 25067520, offset = 3555870208, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[324]: name = blk.24.ffn_gate.weight, size = 25067520, offset = 3580937728, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[325]: name = blk.24.ffn_up.weight, size = 25067520, offset = 3606005248, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[326]: name = blk.24.post_attention_norm.weight, size = 10240, offset = 3631072768, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[327]: name = blk.24.ssm_a, size = 128, offset = 3631083008, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[328]: name = blk.24.ssm_alpha.weight, size = 87040, offset = 3631083136, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[329]: name = blk.24.ssm_beta.weight, size = 87040, offset = 3631170176, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[330]: name = blk.24.ssm_conv1d.weight, size = 131072, offset = 3631257216, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[331]: name = blk.24.ssm_dt.bias, size = 128, offset = 3631388288, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[332]: name = blk.24.ssm_norm.weight, size = 512, offset = 3631388416, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[333]: name = blk.24.ssm_out.weight, size = 11141120, offset = 3631388928, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[334]: name = blk.25.attn_gate.weight, size = 11141120, offset = 3642530048, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[335]: name = blk.25.attn_norm.weight, size = 10240, offset = 3653671168, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[336]: name = blk.25.attn_qkv.weight, size = 22282240, offset = 3653681408, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[337]: name = blk.25.ffn_down.weight, size = 25067520, offset = 3675963648, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[338]: name = blk.25.ffn_gate.weight, size = 25067520, offset = 3701031168, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[339]: name = blk.25.ffn_up.weight, size = 25067520, offset = 3726098688, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[340]: name = blk.25.post_attention_norm.weight, size = 10240, offset = 3751166208, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[341]: name = blk.25.ssm_a, size = 128, offset = 3751176448, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[342]: name = blk.25.ssm_alpha.weight, size = 87040, offset = 3751176576, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[343]: name = blk.25.ssm_beta.weight, size = 87040, offset = 3751263616, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[344]: name = blk.25.ssm_conv1d.weight, size = 131072, offset = 3751350656, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[345]: name = blk.25.ssm_dt.bias, size = 128, offset = 3751481728, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[346]: name = blk.25.ssm_norm.weight, size = 512, offset = 3751481856, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[347]: name = blk.25.ssm_out.weight, size = 11141120, offset = 3751482368, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[348]: name = blk.26.attn_gate.weight, size = 11141120, offset = 3762623488, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[349]: name = blk.26.attn_norm.weight, size = 10240, offset = 3773764608, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[350]: name = blk.26.attn_qkv.weight, size = 22282240, offset = 3773774848, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[351]: name = blk.26.ffn_down.weight, size = 25067520, offset = 3796057088, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[352]: name = blk.26.ffn_gate.weight, size = 25067520, offset = 3821124608, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[353]: name = blk.26.ffn_up.weight, size = 25067520, offset = 3846192128, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[354]: name = blk.26.post_attention_norm.weight, size = 10240, offset = 3871259648, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[355]: name = blk.26.ssm_a, size = 128, offset = 3871269888, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[356]: name = blk.26.ssm_alpha.weight, size = 87040, offset = 3871270016, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[357]: name = blk.26.ssm_beta.weight, size = 87040, offset = 3871357056, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[358]: name = blk.26.ssm_conv1d.weight, size = 131072, offset = 3871444096, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[359]: name = blk.26.ssm_dt.bias, size = 128, offset = 3871575168, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[360]: name = blk.26.ssm_norm.weight, size = 512, offset = 3871575296, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[361]: name = blk.26.ssm_out.weight, size = 11141120, offset = 3871575808, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[362]: name = blk.27.attn_k.weight, size = 2785280, offset = 3882716928, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[363]: name = blk.27.attn_k_norm.weight, size = 1024, offset = 3885502208, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[364]: name = blk.27.attn_norm.weight, size = 10240, offset = 3885503232, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[365]: name = blk.27.attn_output.weight, size = 11141120, offset = 3885513472, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[366]: name = blk.27.attn_q.weight, size = 22282240, offset = 3896654592, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[367]: name = blk.27.attn_q_norm.weight, size = 1024, offset = 3918936832, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[368]: name = blk.27.attn_v.weight, size = 2785280, offset = 3918937856, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[369]: name = blk.27.ffn_down.weight, size = 25067520, offset = 3921723136, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[370]: name = blk.27.ffn_gate.weight, size = 25067520, offset = 3946790656, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[371]: name = blk.27.ffn_up.weight, size = 25067520, offset = 3971858176, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[372]: name = blk.27.post_attention_norm.weight, size = 10240, offset = 3996925696, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[373]: name = blk.28.attn_gate.weight, size = 11141120, offset = 3996935936, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[374]: name = blk.28.attn_norm.weight, size = 10240, offset = 4008077056, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[375]: name = blk.28.attn_qkv.weight, size = 22282240, offset = 4008087296, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[376]: name = blk.28.ffn_down.weight, size = 25067520, offset = 4030369536, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[377]: name = blk.28.ffn_gate.weight, size = 25067520, offset = 4055437056, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[378]: name = blk.28.ffn_up.weight, size = 25067520, offset = 4080504576, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[379]: name = blk.28.post_attention_norm.weight, size = 10240, offset = 4105572096, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[380]: name = blk.28.ssm_a, size = 128, offset = 4105582336, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[381]: name = blk.28.ssm_alpha.weight, size = 87040, offset = 4105582464, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[382]: name = blk.28.ssm_beta.weight, size = 87040, offset = 4105669504, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[383]: name = blk.28.ssm_conv1d.weight, size = 131072, offset = 4105756544, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[384]: name = blk.28.ssm_dt.bias, size = 128, offset = 4105887616, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[385]: name = blk.28.ssm_norm.weight, size = 512, offset = 4105887744, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[386]: name = blk.28.ssm_out.weight, size = 11141120, offset = 4105888256, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[387]: name = blk.29.attn_gate.weight, size = 11141120, offset = 4117029376, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[388]: name = blk.29.attn_norm.weight, size = 10240, offset = 4128170496, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[389]: name = blk.29.attn_qkv.weight, size = 22282240, offset = 4128180736, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[390]: name = blk.29.ffn_down.weight, size = 25067520, offset = 4150462976, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[391]: name = blk.29.ffn_gate.weight, size = 25067520, offset = 4175530496, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[392]: name = blk.29.ffn_up.weight, size = 25067520, offset = 4200598016, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[393]: name = blk.29.post_attention_norm.weight, size = 10240, offset = 4225665536, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[394]: name = blk.29.ssm_a, size = 128, offset = 4225675776, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[395]: name = blk.29.ssm_alpha.weight, size = 87040, offset = 4225675904, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[396]: name = blk.29.ssm_beta.weight, size = 87040, offset = 4225762944, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[397]: name = blk.29.ssm_conv1d.weight, size = 131072, offset = 4225849984, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[398]: name = blk.29.ssm_dt.bias, size = 128, offset = 4225981056, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[399]: name = blk.29.ssm_norm.weight, size = 512, offset = 4225981184, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[400]: name = blk.29.ssm_out.weight, size = 11141120, offset = 4225981696, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[401]: name = blk.30.attn_gate.weight, size = 11141120, offset = 4237122816, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[402]: name = blk.30.attn_norm.weight, size = 10240, offset = 4248263936, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[403]: name = blk.30.attn_qkv.weight, size = 22282240, offset = 4248274176, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[404]: name = blk.30.ffn_down.weight, size = 25067520, offset = 4270556416, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[405]: name = blk.30.ffn_gate.weight, size = 25067520, offset = 4295623936, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[406]: name = blk.30.ffn_up.weight, size = 25067520, offset = 4320691456, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[407]: name = blk.30.post_attention_norm.weight, size = 10240, offset = 4345758976, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[408]: name = blk.30.ssm_a, size = 128, offset = 4345769216, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[409]: name = blk.30.ssm_alpha.weight, size = 87040, offset = 4345769344, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[410]: name = blk.30.ssm_beta.weight, size = 87040, offset = 4345856384, type = q8_0, n_elts = 2560
+gguf_ex_read_1: tensor[411]: name = blk.30.ssm_conv1d.weight, size = 131072, offset = 4345943424, type = f32, n_elts = 32768
+gguf_ex_read_1: tensor[412]: name = blk.30.ssm_dt.bias, size = 128, offset = 4346074496, type = f32, n_elts = 32
+gguf_ex_read_1: tensor[413]: name = blk.30.ssm_norm.weight, size = 512, offset = 4346074624, type = f32, n_elts = 128
+gguf_ex_read_1: tensor[414]: name = blk.30.ssm_out.weight, size = 11141120, offset = 4346075136, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[415]: name = blk.31.attn_k.weight, size = 2785280, offset = 4357216256, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[416]: name = blk.31.attn_k_norm.weight, size = 1024, offset = 4360001536, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[417]: name = blk.31.attn_norm.weight, size = 10240, offset = 4360002560, type = f32, n_elts = 2560
+gguf_ex_read_1: tensor[418]: name = blk.31.attn_output.weight, size = 11141120, offset = 4360012800, type = q8_0, n_elts = 327680
+gguf_ex_read_1: tensor[419]: name = blk.31.attn_q.weight, size = 22282240, offset = 4371153920, type = q8_0, n_elts = 655360
+gguf_ex_read_1: tensor[420]: name = blk.31.attn_q_norm.weight, size = 1024, offset = 4393436160, type = f32, n_elts = 256
+gguf_ex_read_1: tensor[421]: name = blk.31.attn_v.weight, size = 2785280, offset = 4393437184, type = q8_0, n_elts = 81920
+gguf_ex_read_1: tensor[422]: name = blk.31.ffn_down.weight, size = 25067520, offset = 4396222464, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[423]: name = blk.31.ffn_gate.weight, size = 25067520, offset = 4421289984, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[424]: name = blk.31.ffn_up.weight, size = 25067520, offset = 4446357504, type = q8_0, n_elts = 737280
+gguf_ex_read_1: tensor[425]: name = blk.31.post_attention_norm.weight, size = 10240, offset = 4471425024, type = f32, n_elts = 2560
+gguf_ex_read_1: reading tensor 0 data
+gguf_ex_read_1: tensor[0]: n_dims = 1, ne = (2560, 1, 1, 1), name = output_norm.weight, data = 0x79022d18e1b0
+output_norm.weight data[:10] : 0.708984 2.890625 2.640625 2.695312 2.320312 3.359375 3.234375 4.203125 2.289062 2.406250 
+

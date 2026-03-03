@@ -76,3 +76,80 @@ cmake --build build -j10
   free -h && echo "---" && nvidia-smi --query-gpu=memory.total,memory.free --format=csv,noheader
 
    ps aux | grep -E "llama|phase4" | grep -v grep
+
+
+
+cd /home/nav_wsl/code/learn_llama_cpp/llama.cpp && ./build/bin/llama-server --help 2>&1 | grep -E 'parallel|n_parallel|-np|fit|cache-type|ctk|ctv' | head -20
+
+cd /home/nav_wsl/code/learn_llama_cpp/llama.cpp && ./build/bin/llama-server --help 2>&1 | grep -E 'cache-type|TYPE' | head -10
+
+cd /home/nav_wsl/code/learn_llama_cpp/llama.cpp && ./build/bin/llama-server --help 2>&1 | grep -E 'no-warmup|warmup|cache-ram|override' | head -10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Start (shows on terminal + saves to qwenterminal_v1.log)
+cd /home/nav_wsl/code/learn_llama_cpp
+./qwen35_server.sh
+
+# Or background it:
+./qwen35_server.sh &
+echo $! > qwen35.pid
+
+# Test once "server is listening" appears:
+curl -s http://127.0.0.1:8080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model":"qwen35","messages":[{"role":"user","content":"say hello in one sentence"}],"max_tokens":64}' \
+  | python3 -m json.tool
+
+# Stop:
+kill $(<qwen35.pid)
+
+# Check speed in log:
+grep "tokens per second" qwenterminal_v1.log
+
+
+cd /home/nav_wsl/code/learn_llama_cpp/llama.cpp/build
+cmake .. \
+  -DGGML_CUDA=ON \
+  -DCMAKE_CUDA_ARCHITECTURES="75" \
+  -DGGML_CUDA_FORCE_MMQ=ON \
+  -DCMAKE_CUDA_HOST_COMPILER=/usr/bin/g++-10
+cmake --build . --config Release -j$(nproc)
+
+
+# Kill old Q8_0 server
+kill $(<qwen35.pid) 2>/dev/null; sleep 1
+
+# Start with Q4_K_M (new default)
+./qwen35_server.sh &
+echo $! > qwen35.pid
+
+# Test once "server is listening" appears in log:
+sleep 30 && curl -s http://127.0.0.1:8080/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model":"qwen35","messages":[{"role":"user","content":"say hello in one sentence"}],"max_tokens":64}' \
+  | python3 -m json.tool
+
+# Check speed:
+grep "tokens per second" qwenterminal_v2.log

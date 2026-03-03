@@ -3,3 +3,15 @@ build/
 llama.cpp/
 .venv/
 .vscode/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+*.dylib
+*.dll
+*.log
+*.cache
+*.tmp
+*.bak
+*.swp

@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Qwen3-14B regression benchmark sweep for llama.cpp.
+# Generic GGUF regression benchmark sweep for llama.cpp.
 #
 # Usage:
-#   ./qwen14b_regression_benchmark.sh
-#   MODE=smoke ./qwen14b_regression_benchmark.sh
-#   MODE=exhaustive MAX_CASES=120 ./qwen14b_regression_benchmark.sh
-#   MODEL_PATH=/path/to/model.gguf OUT_DIR=/tmp/run ./qwen14b_regression_benchmark.sh
+#   ./qwen08b_regression_benchmark.sh
+#   MODE=smoke ./qwen08b_regression_benchmark.sh
+#   MODE=exhaustive MAX_CASES=120 ./qwen08b_regression_benchmark.sh
+#   MODEL_REPO=unsloth/Qwen3.5-0.8B-GGUF MODEL_FILE=Qwen3.5-0.8B-Q4_K_M.gguf ./qwen08b_regression_benchmark.sh
+#   MODEL_PATH=/path/to/model.gguf OUT_DIR=/tmp/run ./qwen08b_regression_benchmark.sh
 #
 # Optional overrides:
 #   THREAD_VALUES="8 10" NGL_VALUES="0 4 8 12" CTX_VALUES="1024 2048"
@@ -20,7 +21,13 @@ SERVER_BIN="${SERVER_BIN:-$LLAMA_DIR/build/bin/llama-server}"
 BENCH_BIN="${BENCH_BIN:-$LLAMA_DIR/build/bin/llama-bench}"
 CLI_BIN="${CLI_BIN:-$LLAMA_DIR/build/bin/llama-cli}"
 
-MODEL_PATH="${MODEL_PATH:-$HOME/.cache/llama.cpp/unsloth_Qwen3-14B-GGUF_Qwen3-14B-Q4_K_M.gguf}"
+MODEL_REPO="${MODEL_REPO:-unsloth/Qwen3.5-0.8B-GGUF}"
+MODEL_FILE="${MODEL_FILE:-Qwen3.5-0.8B-Q4_K_M.gguf}"
+CACHE_DIR="${CACHE_DIR:-$HOME/.cache/llama.cpp}"
+DEFAULT_MODEL_PATH="$CACHE_DIR/${MODEL_REPO//\//_}_${MODEL_FILE}"
+MODEL_PATH="${MODEL_PATH:-$DEFAULT_MODEL_PATH}"
+BASE_NAME="${MODEL_FILE%.gguf}"
+MODEL_NAME="${MODEL_NAME:-${BASE_NAME}-local}"
 MODE="${MODE:-full}" # smoke | full | exhaustive
 PORT="${PORT:-8080}"
 STARTUP_TIMEOUT="${STARTUP_TIMEOUT:-180}"
@@ -29,7 +36,7 @@ MAX_CASES="${MAX_CASES:-0}" # 0 = no cap
 RUN_LLAMA_BENCH="${RUN_LLAMA_BENCH:-1}"
 RESUME="${RESUME:-1}" # 1 = resume from existing results.csv in OUT_DIR
 
-OUT_DIR="${OUT_DIR:-$ROOT_DIR/archieve/qwen14b_regression_$(date +%Y%m%d_%H%M%S)}"
+OUT_DIR="${OUT_DIR:-$ROOT_DIR/archieve/${BASE_NAME}_regression_$(date +%Y%m%d_%H%M%S)}"
 mkdir -p "$OUT_DIR" "$OUT_DIR/logs"
 
 RESULTS_CSV="$OUT_DIR/results.csv"
@@ -265,11 +272,12 @@ run_case() {
   fi
 
   local payload_1
-  payload_1=$(python3 - "$MAX_TOKENS" <<'PY'
+  payload_1=$(python3 - "$MAX_TOKENS" "$MODEL_NAME" <<'PY'
 import json, sys
 max_tokens = int(sys.argv[1])
+model_name = sys.argv[2]
 obj = {
-  "model": "qwen3-14b-local",
+  "model": model_name,
   "messages": [{"role": "user", "content": "Give 5 concise Linux terminal productivity tips."}],
   "max_tokens": max_tokens,
   "temperature": 0.2,
@@ -282,11 +290,12 @@ PY
 )
 
   local payload_2
-  payload_2=$(python3 - "$MAX_TOKENS" <<'PY'
+  payload_2=$(python3 - "$MAX_TOKENS" "$MODEL_NAME" <<'PY'
 import json, sys
 max_tokens = int(sys.argv[1])
+model_name = sys.argv[2]
 obj = {
-  "model": "qwen3-14b-local",
+  "model": model_name,
   "messages": [{"role": "user", "content": "Now give 3 shell aliases for faster navigation."}],
   "max_tokens": max_tokens,
   "temperature": 0.2,
@@ -327,9 +336,12 @@ require_bin "$SERVER_BIN"
 require_file "$MODEL_PATH"
 setup_arrays
 
-echo "Qwen3-14B regression benchmark" | tee "$META_TXT"
+echo "GGUF regression benchmark" | tee "$META_TXT"
 echo "Date: $(date -Iseconds)" | tee -a "$META_TXT"
 echo "Mode: $MODE" | tee -a "$META_TXT"
+echo "Model repo: $MODEL_REPO" | tee -a "$META_TXT"
+echo "Model file: $MODEL_FILE" | tee -a "$META_TXT"
+echo "Model name: $MODEL_NAME" | tee -a "$META_TXT"
 echo "Model: $MODEL_PATH" | tee -a "$META_TXT"
 echo "Server: $SERVER_BIN" | tee -a "$META_TXT"
 
@@ -532,4 +544,4 @@ if [[ -f "$LLAMA_BENCH_LOG" ]]; then
   echo "- $LLAMA_BENCH_LOG"
 fi
 
-#  MODE=exhaustive OUT_DIR=/home/nav_wsl/code/learn_llama_cpp/archieve/qwen14b_regression_20260226_013044 RESUME=1  ./qwen14b_regression_benchmark.sh
+# MODEL_REPO=unsloth/Qwen3-14B-GGUF MODEL_FILE=Qwen3-14B-Q4_K_M.gguf MODE=exhaustive RESUME=1 ./qwen08b_regression_benchmark.sh

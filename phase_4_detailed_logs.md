@@ -6,10 +6,11 @@ This document tracks Phase 4 execution: identifying available quantized GGUF var
 
 ## Status: 🔄 In Progress
 
-Current checkpoint: model variant + size discovery completed for 3 repos:
+Current checkpoint: model variant + size discovery completed for 4 repos:
 - `unsloth/Qwen3.5-27B-GGUF`
 - `unsloth/Ministral-3-14B-Instruct-2512-GGUF`
 - `unsloth/Qwen3-14B-GGUF`
+- `unsloth/Qwen3.5-0.8B-GGUF`
 
 ---
 
@@ -159,6 +160,36 @@ Why this method:
 | `Qwen3-14B-UD-Q5_K_XL.gguf` | 10546437504 | 9.82 |
 | `Qwen3-14B-UD-Q6_K_XL.gguf` | 13285990784 | 12.37 |
 | `Qwen3-14B-UD-Q8_K_XL.gguf` | 18754560384 | 17.47 |
+
+### Repo: `unsloth/Qwen3.5-0.8B-GGUF` (25 `.gguf` files)
+
+| Variant | Size (bytes) | Size (GiB) |
+|---|---:|---:|
+| `Qwen3.5-0.8B-BF16.gguf` | 1516744736 | 1.41 |
+| `Qwen3.5-0.8B-IQ4_NL.gguf` | 506859776 | 0.47 |
+| `Qwen3.5-0.8B-IQ4_XS.gguf` | 492605696 | 0.46 |
+| `Qwen3.5-0.8B-Q3_K_M.gguf` | 470167808 | 0.44 |
+| `Qwen3.5-0.8B-Q3_K_S.gguf` | 440750336 | 0.41 |
+| `Qwen3.5-0.8B-Q4_0.gguf` | 507154688 | 0.47 |
+| `Qwen3.5-0.8B-Q4_1.gguf` | 535171328 | 0.50 |
+| `Qwen3.5-0.8B-Q4_K_M.gguf` | 532517120 | 0.50 |
+| `Qwen3.5-0.8B-Q4_K_S.gguf` | 508104960 | 0.47 |
+| `Qwen3.5-0.8B-Q5_K_M.gguf` | 590057728 | 0.55 |
+| `Qwen3.5-0.8B-Q5_K_S.gguf` | 568889600 | 0.53 |
+| `Qwen3.5-0.8B-Q6_K.gguf` | 639029504 | 0.60 |
+| `Qwen3.5-0.8B-Q8_0.gguf` | 811843840 | 0.76 |
+| `Qwen3.5-0.8B-UD-IQ2_M.gguf` | 371933440 | 0.35 |
+| `Qwen3.5-0.8B-UD-IQ2_XXS.gguf` | 338227456 | 0.31 |
+| `Qwen3.5-0.8B-UD-IQ3_XXS.gguf` | 398237952 | 0.37 |
+| `Qwen3.5-0.8B-UD-Q2_K_XL.gguf` | 417718528 | 0.39 |
+| `Qwen3.5-0.8B-UD-Q3_K_XL.gguf` | 492216576 | 0.46 |
+| `Qwen3.5-0.8B-UD-Q4_K_XL.gguf` | 558772480 | 0.52 |
+| `Qwen3.5-0.8B-UD-Q5_K_XL.gguf` | 606585088 | 0.56 |
+| `Qwen3.5-0.8B-UD-Q6_K_XL.gguf` | 771092736 | 0.72 |
+| `Qwen3.5-0.8B-UD-Q8_K_XL.gguf` | 1186443520 | 1.10 |
+| `mmproj-BF16.gguf` | 207346528 | 0.19 |
+| `mmproj-F16.gguf` | 204987232 | 0.19 |
+| `mmproj-F32.gguf` | 402381664 | 0.37 |
 
 ---
 

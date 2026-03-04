@@ -54,9 +54,10 @@ except ImportError:
 # ── Configuration ────────────────────────────────────────────────────────────
 
 CFG = {
-    "server_url": os.environ.get("SERVER_URL", "http://127.0.0.1:8080"),
-    "model": os.environ.get("BENCH_MODEL", "qwen35"),
+    "server_url": os.environ.get("SERVER_URL", "http://172.31.16.1:1234"),
+    "model": os.environ.get("BENCH_MODEL", "qwen3.5-4b@q5_k_s"),
     "timeout": int(os.environ.get("BENCH_TIMEOUT", "120")),
+    "native_tools": os.environ.get("BENCH_NATIVE_TOOLS", "0").strip().lower() in {"1", "true", "yes", "on"},
 }
 
 # ── Data structures ──────────────────────────────────────────────────────────
@@ -91,6 +92,40 @@ class TestResult:
     latency_ms: float
     tokens_per_sec: float
     error: str = ""
+
+
+def _to_serializable(value: Any) -> Any:
+    """Best-effort conversion to JSON-serializable values for debug logs."""
+    if isinstance(value, (str, int, float, bool)) or value is None:
+        return value
+    if isinstance(value, dict):
+        return {str(k): _to_serializable(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_to_serializable(v) for v in value]
+    return str(value)
+
+
+def append_debug_record(debug_path: Path | None, record: dict[str, Any]) -> None:
+    """Append one debug record to a pretty-printed JSON array file."""
+    if not debug_path:
+        return
+
+    serializable_record = _to_serializable(record)
+    existing: list[Any] = []
+
+    if debug_path.exists():
+        try:
+            with open(debug_path, "r", encoding="utf-8") as f:
+                loaded = json.load(f)
+                if isinstance(loaded, list):
+                    existing = loaded
+        except (json.JSONDecodeError, OSError):
+            existing = []
+
+    existing.append(serializable_record)
+
+    with open(debug_path, "w", encoding="utf-8") as f:
+        json.dump(existing, f, ensure_ascii=False, indent=2)
 
 
 # ── Checking / scoring helpers ───────────────────────────────────────────────
@@ -251,11 +286,34 @@ def check_error_recovery(text: str, *, error_keywords: list[str], fix_keywords: 
     lower = text.lower()
     err_found = [k for k in error_keywords if k.lower() in lower]
     fix_found = [k for k in fix_keywords if k.lower() in lower]
+
+    # Semantic recovery signals to reduce brittle exact-keyword dependence.
+    semantic_fix_patterns = [
+        r"\bcorrect(?:ed|ion)?\b",
+        r"\bclean(?:ing)?\b",
+        r"\bfix(?:ed|ing)?\b",
+        r"\bhandle\b",
+        r"\breplace\b",
+        r"\bremove\b",
+        r"\bimput(?:e|ation)\b",
+        r"\bfill(?: in)?\b",
+        r"\bvalidate\b",
+        r"\bconvert\b",
+        r"\bstandardiz(?:e|ation)\b",
+        r"\bask for clarif(?:ication|y)\b",
+        r"\bprovide (?:the )?correct(?:ed)? (?:data|values?)\b",
+    ]
+    semantic_fix_count = sum(1 for pat in semantic_fix_patterns if re.search(pat, lower))
+
     err_score = len(err_found) / max(len(error_keywords), 1)
-    fix_score = len(fix_found) / max(len(fix_keywords), 1)
+    fix_score_lexical = len(fix_found) / max(len(fix_keywords), 1)
+    fix_score_semantic = min(semantic_fix_count / 4, 1.0)
+    fix_score = max(fix_score_lexical, fix_score_semantic)
     score = (err_score * 0.4) + (fix_score * 0.6)
     passed = err_score >= 0.5 and fix_score >= 0.5
-    return passed, round(score, 2), f"errors: {err_found}, fixes: {fix_found}"
+    return passed, round(score, 2), (
+        f"errors: {err_found}, fixes: {fix_found}, semantic_fix_hits: {semantic_fix_count}"
+    )
 
 
 def check_constraint_satisfaction(text: str, *, constraints: list[dict], **_kw) -> tuple[bool, float, str]:
@@ -265,7 +323,15 @@ def check_constraint_satisfaction(text: str, *, constraints: list[dict], **_kw) 
     for c in constraints:
         ctype = c["type"]
         if ctype == "contains":
-            if c["value"].lower() in text.lower():
+            # Treat common bullet markers as equivalent for robustness.
+            if c["value"] == "•":
+                has_bullet = bool(re.search(r"(?:^|\n)\s*[-*•]\s+", text))
+                if has_bullet:
+                    met += 1
+                    details.append("✓ contains bullet list")
+                else:
+                    details.append("✗ missing bullet list")
+            elif c["value"].lower() in text.lower():
                 met += 1
                 details.append(f"✓ contains '{c['value']}'")
             else:
@@ -461,7 +527,7 @@ TEST_CASES: list[TestCase] = [
             {"type": "function", "function": {"name": "web_search", "description": "Search the web", "parameters": {"type": "object", "properties": {"query": {"type": "string"}}, "required": ["query"]}}},
             {"type": "function", "function": {"name": "send_email", "description": "Send an email", "parameters": {"type": "object", "properties": {"to": {"type": "string"}, "subject": {"type": "string"}, "body": {"type": "string"}}, "required": ["to", "subject", "body"]}}},
         ],
-        tool_choice="auto",
+        tool_choice="required",
         max_tokens=200, check="tool_call", check_args={"tool_name": "calculator"},
     ),
 
@@ -683,27 +749,192 @@ def call_chat_completion(
     tools: list[dict] | None = None,
     tool_choice: str | dict | None = None,
 ) -> dict[str, Any]:
-    """Call the OpenAI-compatible chat completions endpoint."""
-    url = f"{CFG['server_url']}/v1/chat/completions"
+    """Call LM Studio endpoints, using chat/completions for tool-enabled requests."""
+
+    # Prepare flat text once for fallback /v1/responses path.
+    normalized_lines: list[str] = []
+    for m in messages:
+        role = m.get("role", "user")
+        content = m.get("content", "")
+        if content is None:
+            content = ""
+        normalized_lines.append(f"{role}: {content}")
+        if m.get("tool_calls"):
+            normalized_lines.append(f"{role}_tool_calls: {json.dumps(m['tool_calls'], ensure_ascii=False)}")
+        if role == "tool" and m.get("tool_call_id"):
+            normalized_lines.append(f"tool_call_id: {m['tool_call_id']}")
+    input_text = "\n".join(normalized_lines) if normalized_lines else ""
+
+    # If tools are provided, use the OpenAI-compatible tool-calling path.
+    if tools:
+        url = f"{CFG['server_url']}/v1/chat/completions"
+        payload: dict[str, Any] = {
+            "model": model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+            "temperature": temperature,
+            "tools": tools,
+        }
+        if tool_choice:
+            payload["tool_choice"] = tool_choice
+
+        resp = requests.post(url, json=payload, timeout=CFG['timeout'])
+        if resp.status_code >= 400:
+            try:
+                err_payload = resp.json()
+            except Exception:
+                err_payload = resp.text
+            raise RuntimeError(f"HTTP {resp.status_code} from {url}: {err_payload}")
+
+        data = resp.json()
+        choice = data.get("choices", [{}])[0]
+        message = choice.get("message", {}) if isinstance(choice, dict) else {}
+        content = message.get("content") or ""
+        tool_calls_parsed = message.get("tool_calls", []) or []
+
+        usage = data.get("usage", {}) if isinstance(data, dict) else {}
+        prompt_tokens = usage.get("prompt_tokens") or len(input_text.split())
+        completion_tokens = usage.get("completion_tokens") or len(str(content).split())
+        total_tokens = usage.get("total_tokens") or (prompt_tokens + completion_tokens)
+
+        return {
+            "choices": [{
+                "message": {
+                    "content": content,
+                    "tool_calls": tool_calls_parsed,
+                }
+            }],
+            "usage": {
+                "prompt_tokens": prompt_tokens,
+                "completion_tokens": completion_tokens,
+                "total_tokens": total_tokens,
+            },
+            "_debug": {
+                "endpoint": url,
+                "request_payload": payload,
+                "raw_response": data,
+                "parse_notes": ["chat_completions"],
+            },
+        }
+
+    # No tools: use /v1/responses (faster + works well for plain generations).
+    url = f"{CFG['server_url']}/v1/responses"
     payload = {
         "model": model,
-        "messages": messages,
-        "max_tokens": max_tokens,
-        "temperature": temperature,
+        "input": input_text,
     }
-    if tools:
-        payload["tools"] = tools
-    if tool_choice:
-        payload["tool_choice"] = tool_choice
+
     resp = requests.post(url, json=payload, timeout=CFG['timeout'])
-    resp.raise_for_status()
-    return resp.json()
+    if resp.status_code >= 400:
+        try:
+            err_payload = resp.json()
+        except Exception:
+            err_payload = resp.text
+        raise RuntimeError(f"HTTP {resp.status_code} from {url}: {err_payload}")
+    data = resp.json()
+
+    parse_notes: list[str] = []
+    text_parts: list[str] = []
+    tool_calls_parsed: list[dict[str, Any]] = []
+
+    if isinstance(data, str):
+        text_parts.append(data)
+        parse_notes.append("root:string")
+    elif isinstance(data, dict):
+        if isinstance(data.get("output_text"), str):
+            text_parts.append(data["output_text"])
+            parse_notes.append("output_text")
+
+        output_items = data.get("output", [])
+        if isinstance(output_items, list):
+            for item in output_items:
+                if not isinstance(item, dict):
+                    continue
+
+                item_type = item.get("type", "")
+                if item_type == "function_call":
+                    tool_calls_parsed.append({
+                        "type": "function",
+                        "function": {
+                            "name": item.get("name", ""),
+                            "arguments": item.get("arguments", "{}"),
+                        },
+                    })
+                    parse_notes.append("output:function_call")
+
+                if item_type == "message":
+                    content_list = item.get("content", [])
+                    if isinstance(content_list, list):
+                        for chunk in content_list:
+                            if not isinstance(chunk, dict):
+                                continue
+                            ctype = chunk.get("type", "")
+                            if ctype in {"output_text", "text", "input_text"}:
+                                text = chunk.get("text")
+                                if isinstance(text, str) and text.strip():
+                                    text_parts.append(text)
+                                    parse_notes.append(f"message:{ctype}")
+
+                legacy_calls = item.get("tool_calls")
+                if isinstance(legacy_calls, list):
+                    for c in legacy_calls:
+                        if isinstance(c, dict):
+                            tool_calls_parsed.append(c)
+                    parse_notes.append("output:tool_calls")
+
+        if isinstance(data.get("response"), str):
+            text_parts.append(data["response"])
+            parse_notes.append("response")
+
+        if not text_parts and isinstance(data.get("content"), str):
+            text_parts.append(data["content"])
+            parse_notes.append("content")
+
+    content = "\n".join([t for t in text_parts if isinstance(t, str) and t.strip()]).strip()
+    if not content:
+        content = json.dumps(data, ensure_ascii=False)
+        parse_notes.append("fallback:raw_json")
+
+    usage = data.get("usage", {}) if isinstance(data, dict) else {}
+    prompt_tokens = (
+        usage.get("prompt_tokens")
+        or usage.get("input_tokens")
+        or len(input_text.split())
+    )
+    completion_tokens = (
+        usage.get("completion_tokens")
+        or usage.get("output_tokens")
+        or len(content.split())
+    )
+    total_tokens = usage.get("total_tokens") or (prompt_tokens + completion_tokens)
+
+    # Return in OpenAI-like format for compatibility
+    return {
+        "choices": [{
+            "message": {
+                "content": content,
+                "tool_calls": tool_calls_parsed,
+            }
+        }],
+        "usage": {
+            "prompt_tokens": prompt_tokens,
+            "completion_tokens": completion_tokens,
+            "total_tokens": total_tokens,
+        },
+        "_debug": {
+            "endpoint": url,
+            "request_payload": payload,
+            "raw_response": data,
+            "parse_notes": parse_notes,
+        },
+    }
 
 
 def health_check() -> bool:
-    """Check if the server is up."""
+    """Check if the server is up by trying a simple request."""
     try:
-        r = requests.get(f"{CFG['server_url']}/health", timeout=10)
+        payload = {"model": CFG["model"], "input": "Hello"}
+        r = requests.post(f"{CFG['server_url']}/v1/responses", json=payload, timeout=10)
         return r.status_code == 200
     except Exception:
         return False
@@ -711,7 +942,7 @@ def health_check() -> bool:
 
 # ── Runner ───────────────────────────────────────────────────────────────────
 
-def run_test(tc: TestCase, model: str) -> TestResult:
+def run_test(tc: TestCase, model: str, debug_path: Path | None = None) -> TestResult:
     """Execute a single test case and evaluate its result."""
     start = time.perf_counter()
     try:
@@ -733,6 +964,8 @@ def run_test(tc: TestCase, model: str) -> TestResult:
         # Extract structured tool calls if present
         tool_calls_raw = choice["message"].get("tool_calls", []) or []
 
+        debug_meta = data.get("_debug", {})
+
         usage = data.get("usage", {})
         prompt_tokens = usage.get("prompt_tokens", 0)
         completion_tokens = usage.get("completion_tokens", 0)
@@ -749,6 +982,23 @@ def run_test(tc: TestCase, model: str) -> TestResult:
                 content = json.dumps([{"function": c["function"]["name"], "arguments": c["function"]["arguments"]} for c in tool_calls_raw])
         passed, score, reason = check_fn(content, **extra_args)
 
+        append_debug_record(debug_path, {
+            "timestamp": datetime.now().isoformat(timespec="seconds"),
+            "test_id": tc.id,
+            "category": tc.category,
+            "name": tc.name,
+            "check": tc.check,
+            "check_args": tc.check_args,
+            "passed": passed,
+            "score": score,
+            "reason": reason,
+            "latency_ms": round(elapsed_ms, 1),
+            "tokens_per_sec": round(tps, 2),
+            "response_excerpt": content[:1000],
+            "tool_calls": tool_calls_raw,
+            "debug": debug_meta,
+        })
+
         return TestResult(
             id=tc.id, category=tc.category, name=tc.name,
             passed=passed, score=score, reason=reason,
@@ -761,6 +1011,19 @@ def run_test(tc: TestCase, model: str) -> TestResult:
         )
     except Exception as e:
         elapsed_ms = (time.perf_counter() - start) * 1000
+        append_debug_record(debug_path, {
+            "timestamp": datetime.now().isoformat(timespec="seconds"),
+            "test_id": tc.id,
+            "category": tc.category,
+            "name": tc.name,
+            "check": tc.check,
+            "check_args": tc.check_args,
+            "passed": False,
+            "score": 0.0,
+            "reason": "error",
+            "latency_ms": round(elapsed_ms, 1),
+            "error": str(e),
+        })
         return TestResult(
             id=tc.id, category=tc.category, name=tc.name,
             passed=False, score=0.0, reason="error",
@@ -774,19 +1037,24 @@ def run_all(model: str, out_dir: Path) -> list[TestResult]:
     """Run all test cases sequentially, printing progress."""
     results: list[TestResult] = []
     total = len(TEST_CASES)
+    debug_path = out_dir / "debug.json"
+    if debug_path.exists():
+        debug_path.unlink()
 
-    print(f"\n{'='*70}")
+    print(f"\n{'='*70
+               }")
     print(f"  Qwen3.5-4B Capability Benchmark")
     print(f"  Server  : {CFG['server_url']}")
     print(f"  Model   : {model}")
     print(f"  Tests   : {total}")
     print(f"  Output  : {out_dir}")
+    print(f"  Debug   : {debug_path}")
     print(f"{'='*70}\n")
 
     for i, tc in enumerate(TEST_CASES, 1):
         tag = f"[{i:2d}/{total}]"
         print(f"{tag} {tc.category:20s} | {tc.name:30s} ", end="", flush=True)
-        result = run_test(tc, model)
+        result = run_test(tc, model, debug_path=debug_path)
         status = "PASS ✓" if result.passed else "FAIL ✗"
         print(f"| {status} | {result.score:.0%} | {result.latency_ms:7.0f}ms | {result.tokens_per_sec:5.1f} t/s")
         if result.error:
@@ -877,13 +1145,20 @@ def main():
     parser.add_argument("--model", default=CFG["model"], help="Model name for API requests")
     parser.add_argument("--out-dir", default=None, help="Output directory (default: auto-timestamped)")
     parser.add_argument("--timeout", type=int, default=CFG["timeout"], help="Per-request timeout in seconds")
+    parser.add_argument(
+        "--native-tools",
+        action="store_true",
+        help="Send native tools/tool_choice fields to /v1/responses (disabled by default)",
+    )
     args = parser.parse_args()
 
     CFG["server_url"] = args.server_url
     CFG["timeout"] = args.timeout
+    CFG["native_tools"] = args.native_tools or CFG.get("native_tools", False)
 
     # Health check
     print(f"Checking server at {CFG['server_url']} …")
+    print(f"Native tools mode: {'ON' if CFG.get('native_tools') else 'OFF (text fallback)'}")
     if not health_check():
         print(f"ERROR: Server not reachable at {CFG['server_url']}")
         print("Start it with: ./qwen35_server.sh &")

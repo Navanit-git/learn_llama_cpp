@@ -153,3 +153,11 @@ sleep 30 && curl -s http://127.0.0.1:8080/v1/chat/completions \
 
 # Check speed:
 grep "tokens per second" qwenterminal_v2.log
+
+# Test API with corrected JSON (no trailing comma)
+curl http://172.31.16.1:1234/v1/responses \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "qwen3.5-4b@q5_k_s",
+    "input": "Provide a prime number less than 50"
+  }'
